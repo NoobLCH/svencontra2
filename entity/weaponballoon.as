@@ -132,6 +132,6 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
         m.End();
 
         g_EntityFuncs.Create(szSpawnItem, self.pev.origin, self.pev.angles, false, self.edict());
-        BaseClass.Killed(@pevAttacker, iGib);
+        g_EntityFuncs.Remove(self);
     }
 }
