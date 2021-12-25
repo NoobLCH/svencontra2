@@ -106,7 +106,6 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
         BaseClass.Spawn();
     }
     void Use(CBaseEntity@ pActivator, CBaseEntity@ pCaller, USE_TYPE useType, float flValue = 0.0f){
-        g_Log.PrintF("3\n");
         Init();
     }
     void Think(){
