@@ -1,8 +1,12 @@
+//从sven-coop.fgd里复制的基类
+@BaseClass = Mandatory
+[
+	ondestroyfn(string) : "OnDestroy Function"
+]
 @BaseClass base(Mandatory) = Targetname
 [
 	targetname(target_source) : "Name"
 ]
-
 @BaseClass = Target
 [
 	target(target_destination) : "Target"
@@ -180,6 +184,7 @@
 	]
 ]
 
+
 //业务代码
 @PointClass base(Targetname, Target) size(-16 -16 -16, 16 16 16) color(255 50 50) = weaponballoon : "Weapon Balloon"
 [
@@ -197,23 +202,21 @@
 	kShowName(string) : "Show name" : "Weapon Balloon"
 	kBaloonFloatSpeed(string) : "Floating up and down speed" : "0.5"
 ]
-
 @PointClass base(Targetname, Target) = trigger_tankdefine : "Tank Rocket Definer"
 [
 	weapon(choices) : "Replaced weapon" : 0 =
 	[
-		1 : "机械-小型炮塔 (小黄球)"
-		2 : "机械-中型炮塔 (红球)"
-		3 : "机械-重型炮塔A型 (灰蓝球)"
-		4 : "机械-重型炮塔B型 (黄球)"
-		5 : "异形-中型炮塔 (绿球)"
-		6 : "异形-小型炮塔 (小蓝球)"
-		7 : "异形-小型炮塔 (小红球)"
-		8 : "异形-大型炮塔 (紫球)"
+		1 : "Machine-Small(Yellow)"
+		2 : "Machine-Middle(Red)"
+		3 : "Machine-Heavy-A(Bice)"
+		4 : "Machine-Heavy-B(Yellow)"
+        6 : "Alien-Small(Blue)"
+		7 : "Alien-Small(Red)"
+		5 : "Alien-Middle(Green)"
+		8 : "Alien-Huge(Purple)"
 	]
 	bulletspeed(string) : "Bullet Speed" : "400.0"
 ]
-
 @SolidClass base(Trigger, Angles) = func_noprojclip : "Trigger push player only"
 [
 	spawnflags(flags) =
