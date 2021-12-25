@@ -27,7 +27,7 @@ void MapInit(){
     g_CustomEntityFuncs.RegisterCustomEntity( "CNoProjClip", "func_noprojclip" );
     g_CustomEntityFuncs.RegisterCustomEntity( "CWeaponFlag", WEAPONFLAG_REGISTERNAME );
     g_CustomEntityFuncs.RegisterCustomEntity( "CProjBullet", BULLET_REGISTERNAME );
-    g_CustomEntityFuncs.RegisterCustomEntity( "CWeaponBalloon", "weaponballon" );
+    g_CustomEntityFuncs.RegisterCustomEntity( "CWeaponBalloon", "weaponballoon" );
     g_CustomEntityFuncs.RegisterCustomEntity( "trigger_tankdefine", "trigger_tankdefine" );
     g_CustomEntityFuncs.RegisterCustomEntity( "trigger_rocketreplace", "trigger_rocketreplace" );
     g_Game.PrecacheOther(BULLET_REGISTERNAME);

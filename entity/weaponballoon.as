@@ -5,11 +5,15 @@ kBaloonFloatSpeed 气球上下移动速度
 kSprPath 爆炸spr路径
 kSprScale 爆炸spr缩放
 kSoundPath 爆炸音效路径
+kShowName 显示名称
 speed 飞行速度
 model 模型路径
 target info_target名称
 */
-class CWeaponBalloon : ScriptBaseEntity{
+//生成时自动触发
+const int SF_WEAPONBALLON_STARTSPAWN = 1;
+
+class CWeaponBalloon : ScriptBaseMonsterEntity{
     private bool bInUp = true;
     private string szSpawnItem = "";
     private string szSprPath = "";
@@ -44,6 +48,10 @@ class CWeaponBalloon : ScriptBaseEntity{
             szSoundPath = szValue;
             return true;
         }
+        else if(szKeyName == "kShowName"){
+            self.m_FormattedName = szValue;
+            return true;
+        }
         return BaseClass.KeyValue(szKeyName, szValue);
     }
     void Precache(){
@@ -58,15 +66,12 @@ class CWeaponBalloon : ScriptBaseEntity{
         g_SoundSystem.PrecacheSound( szSoundPath );
         g_Game.PrecacheGeneric( "sound/" + szSoundPath );
     }
-    void Spawn(){
-        if(szSpawnItem.IsEmpty())
+    void Init(){
+        CBaseEntity@ pEntity = g_EntityFuncs.FindEntityByTargetname(@pEntity, self.pev.target);
+        if(@pEntity is null){
+            g_EntityFuncs.Remove(self);
             return;
-        CBaseEntity@ pEntity = null;
-        @pEntity = g_EntityFuncs.FindEntityByTargetname(@pEntity, self.pev.target);
-        if(@pEntity is null)
-            return;
-        Precache();
-
+        }
         Vector vecLine = pEntity.pev.origin - self.pev.origin;
         self.pev.angles = Math.VecToAngles(vecLine.Normalize());
         flDestoryTime = g_Engine.time + vecLine.Length() / self.pev.speed;
@@ -77,13 +82,32 @@ class CWeaponBalloon : ScriptBaseEntity{
 
 		self.pev.movetype = MOVETYPE_FLY;
 		self.pev.solid = SOLID_SLIDEBOX;
+        self.pev.effects &= ~EF_NODRAW;
+        self.pev.takedamage = DAMAGE_YES;
 
         self.pev.health = self.pev.max_health = 1;
 
 		g_EntityFuncs.SetModel( self, string( self.pev.model ).IsEmpty() ? "models/common/lambda.mdl" : string(self.pev.model) );
-        g_EntityFuncs.SetOrigin( self, self.pev.origin );
+        g_EntityFuncs.SetSize( self.pev, Vector(-16,-16,-16), Vector(16, 16, 16));
+    }
+    void Spawn(){
+        if(szSpawnItem.IsEmpty())
+            return;
+        Precache();
 
+        if(self.pev.spawnflags & SF_WEAPONBALLON_STARTSPAWN != 0)
+            Init();
+        else{
+            self.pev.movetype = MOVETYPE_NONE;
+		    self.pev.solid = SOLID_NOT;
+            self.pev.effects |= EF_NODRAW;
+        }
+        g_EntityFuncs.SetOrigin( self, self.pev.origin );
         BaseClass.Spawn();
+    }
+    void Use(CBaseEntity@ pActivator, CBaseEntity@ pCaller, USE_TYPE useType, float flValue = 0.0f){
+        g_Log.PrintF("3\n");
+        Init();
     }
     void Think(){
         if(int(g_Engine.time) % iFlyReverseTime == 0){
