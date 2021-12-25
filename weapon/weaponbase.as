@@ -93,7 +93,7 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
     void Materialize(){
         if(pFlagEntity.IsValid())
             g_EntityFuncs.Remove(pFlagEntity.GetEntity());
-        if(szFloatFlagModel != ""){
+        if(szFloatFlagModel != "" && @m_pPlayer is null){
             Vector vecOrigin = self.pev.origin;
             vecOrigin.z += flFlagHeight;
             CBaseEntity@ pEntity = g_EntityFuncs.Create(WEAPONFLAG_REGISTERNAME, vecOrigin, self.pev.angles, true, self.edict());
