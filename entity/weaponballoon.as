@@ -75,7 +75,7 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
         }
         Vector vecLine = pEntity.pev.origin - self.pev.origin;
         self.pev.angles = Math.VecToAngles(vecLine.Normalize());
-        flDestoryTime = vecLine.Length() / self.pev.speed;
+        flDestoryTime = float(vecLine.Length()) / self.pev.speed;
         self.pev.velocity = vecLine.Normalize() * self.pev.speed;
         flInitVelocityZ = self.pev.velocity.z;
         self.pev.velocity.z += flBaloonUpSpeed;
