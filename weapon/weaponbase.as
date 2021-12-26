@@ -55,11 +55,11 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
         g_Game.PrecacheModel( szWModel );
         g_Game.PrecacheModel( szPModel );
         g_Game.PrecacheModel( szVModel );
-        if(szShellModel != ""){
+        if(!szShellModel.IsEmpty()){
             iShell = g_Game.PrecacheModel( szShellModel );
             g_Game.PrecacheGeneric( szShellModel );
         }
-        if(szFloatFlagModel != ""){
+        if(!szFloatFlagModel.IsEmpty()){
             g_Game.PrecacheModel( szFloatFlagModel );
             g_Game.PrecacheGeneric( szFloatFlagModel );
         }
@@ -85,15 +85,13 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
 		NetworkMessage message( MSG_ONE, NetworkMessages::WeapPickup, pPlayer.edict() );
 			message.WriteLong( self.m_iId );
 		message.End();
-        g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, szPickUpSound, 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
+        g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_WEAPON, szPickUpSound, 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
         if(pFlagEntity.IsValid())
-            g_EntityFuncs.Remove(pFlagEntity.GetEntity());
+            g_EntityFuncs.Remove(pFlagEntity);
 		return true;
 	}
     void Materialize(){
-        if(pFlagEntity.IsValid())
-            g_EntityFuncs.Remove(pFlagEntity.GetEntity());
-        if(szFloatFlagModel != "" && @m_pPlayer is null){
+        if(!szFloatFlagModel.IsEmpty() && !pFlagEntity.IsValid()){
             Vector vecOrigin = self.pev.origin;
             vecOrigin.z += flFlagHeight;
             CBaseEntity@ pEntity = g_EntityFuncs.Create(WEAPONFLAG_REGISTERNAME, vecOrigin, self.pev.angles, true, self.edict());

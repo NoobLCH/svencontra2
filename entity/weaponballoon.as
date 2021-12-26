@@ -134,7 +134,15 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
             m.WriteByte(0);
         m.End();
 
-        g_EntityFuncs.Create(szSpawnItem, self.pev.origin, self.pev.angles, false, self.edict());
+        CBaseEntity@ pEntity = g_EntityFuncs.CreateEntity(szSpawnItem, 
+            dictionary = {
+                {"origin", self.pev.origin.ToString()},
+                {"angles", self.pev.angles.ToString()},
+                {"m_flCustomRespawnTime", "-1"},
+                {"IsNotAmmoItem", "1"}
+            }, false);
+        @pEntity.pev.owner = self.edict();
+        g_EntityFuncs.DispatchSpawn(pEntity.edict());
         g_EntityFuncs.Remove(self);
     }
 }
