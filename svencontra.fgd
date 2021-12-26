@@ -199,8 +199,8 @@
 	kSprPath(string) : "Spr path when destory"
 	kSprScale(string) : "Spr scale when destory" : "1.0"
 	kReverseTime(integer) : "Upside down interval(seconds)" : 4
+    kBaloonFloatSpeed(string) : "Floating up and down speed" : "120"
 	kShowName(string) : "Show name" : "Weapon Balloon"
-	kBaloonFloatSpeed(string) : "Floating up and down speed" : "0.5"
 ]
 @PointClass base(Targetname, Target) = trigger_tankdefine : "Tank Rocket Definer"
 [
