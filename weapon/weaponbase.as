@@ -45,8 +45,8 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
 		self.FallInit();
 	}
     void Precache(){
-        g_SoundSystem.PrecacheSound( "hl/weapons/357_cock1.wav" );
-        g_Game.PrecacheGeneric( "sound/hl/weapons/357_cock1.wav" );
+        g_SoundSystem.PrecacheSound( "weapons/svencontra2/ar_reload.wav" );
+        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/ar_reload.wav" );
         g_SoundSystem.PrecacheSound( szPickUpSound );
         g_Game.PrecacheGeneric( "sound/" + szPickUpSound );
         g_SoundSystem.PrecacheSound( szFireSound );
@@ -109,7 +109,7 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
     bool PlayEmptySound(){
 		if( self.m_bPlayEmptySound ){
 			self.m_bPlayEmptySound = false;
-			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hl/weapons/357_cock1.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
+			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "weapons/svencontra2/ar_reload.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}

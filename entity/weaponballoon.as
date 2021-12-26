@@ -23,6 +23,7 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
     private int iFlyReverseTime = 4;
     private float flBaloonUpSpeed = 16.0f;
     private float flInitVelocityZ;
+    private CScheduledFunction@ pDestoryScheduler = null;
 
     bool KeyValue(const string& in szKeyName, const string& in szValue){
         if(szKeyName == "kSpawnItem"){
@@ -91,7 +92,7 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
 		g_EntityFuncs.SetModel( self, string( self.pev.model ).IsEmpty() ? "models/common/lambda.mdl" : string(self.pev.model) );
         g_EntityFuncs.SetSize( self.pev, Vector(-16,-16,-16), Vector(16, 16, 16));
 
-        g_Scheduler.SetTimeout(this, "Remove", flDestoryTime);
+        @pDestoryScheduler = g_Scheduler.SetTimeout(this, "Remove", flDestoryTime);
     }
     void Remove(){
         if(self !is null)
@@ -121,6 +122,8 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
         self.pev.nextthink = g_Engine.time + iFlyReverseTime;
     }
     void Killed(entvars_t@ pevAttacker, int iGib){
+        BaseClass.Killed(pevAttacker, iGib);
+
         g_SoundSystem.EmitSoundDyn( self.edict(), CHAN_WEAPON, szSoundPath, 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
 
         NetworkMessage m(MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY, null);
@@ -143,6 +146,8 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
             }, false);
         @pEntity.pev.owner = self.edict();
         g_EntityFuncs.DispatchSpawn(pEntity.edict());
+        SetThink(null);
+        g_Scheduler.RemoveTimer(@pDestoryScheduler);
         g_EntityFuncs.Remove(self);
     }
 }

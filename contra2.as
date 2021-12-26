@@ -47,6 +47,8 @@ void MapInit(){
 	g_ItemRegistry.RegisterWeapon( "weapon_sc2mg", "svencontra2", "556");
     g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2sg", "weapon_sc2sg" );
 	g_ItemRegistry.RegisterWeapon( "weapon_sc2sg", "svencontra2", "buckshot");
+
+    g_SurvivalMode.EnableMapSupport();
 }
 
 void MapStart(){

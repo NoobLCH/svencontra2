@@ -10,7 +10,7 @@ const float flMonsterDeathSprFrameRate = 20.0f;
 //spr缩放
 const float flSprScale = 2.0f;
 //向上抬起速度
-const float flMonsterDeathLiftSpeed = 300;
+const float flMonsterDeathLiftSpeed = 200;
 //修改重力
 const float flMonsterDeathLiftGravity = 0.4;
 //渲染模式
@@ -24,11 +24,11 @@ const int iMosnterDeathSprRender = 1;
 //音频对应表
 const dictionary dicMonsterDeathMap = {
     {"monster_human_grunt", array<string> = {"sprites/svencontra2/deadspray_a.spr", "svencontra2/npcdead_a.wav"}},
-    {"monster_human_grunt_ally", array<string> = {"sprites/svencontra2/deadspray_b.spr", "svencontra2/npcdead_b.wav"}},
-    {"monster_grunt_repel", array<string> = {"sprites/svencontra2/deadspray_c.spr", "svencontra2/npcdead_c.wav"}},
-    {"monster_hwgrunt", array<string> = {"sprites/svencontra2/deadspray_d.spr", "svencontra2/npcdead_d.wav"}},
-    {"monster_headcrab", array<string> = {"sprites/svencontra2/deadspray_e.spr", "svencontra2/npcdead_e.wav"}},
-    {"monster_zombie_soldier", array<string> = {"sprites/svencontra2/deadspray_f.spr", "svencontra2/npcdead_f.wav"}}
+    {"monster_human_grunt_ally", array<string> = {"sprites/svencontra2/deadspray_a.spr", "svencontra2/npcdead_b.wav"}},
+    {"monster_grunt_repel", array<string> = {"sprites/svencontra2/deadspray_a.spr", "svencontra2/npcdead_a.wav"}},
+    {"monster_hwgrunt", array<string> = {"sprites/svencontra2/deadspray_a.spr", "svencontra2/npcdead_b.wav"}},
+    {"monster_headcrab", array<string> = {"sprites/svencontra2/deadspray_c.spr", "svencontra2/npcdead_d.wav"}},
+    {"monster_zombie_soldier", array<string> = {"sprites/svencontra2/deadspray_b.spr", "svencontra2/npcdead_c.wav"}}
 };
 
 void PrecacheAllMonsterDeath(){
@@ -62,7 +62,7 @@ void PlayMonsterDeathSpr(EHandle pWho){
     g_SoundSystem.EmitSoundDyn( pEntity.edict(), CHAN_WEAPON, szSound, 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
     CSprite@ pSpr = g_EntityFuncs.CreateSprite(szSpr, pEntity.pev.origin, true);
     pSpr.AnimateAndDie(flMonsterDeathSprFrameRate);
-    pSpr.SetTransparency( kRenderTransAlpha, 255, 0, 0, 200, iMosnterDeathSprRender );
+    pSpr.SetTransparency( kRenderTransAlpha, 255, 255, 255, 255, iMosnterDeathSprRender );
     pSpr.pev.velocity.z = Math.RandomFloat(40, 80);
     pSpr.SetScale( flSprScale );
     g_EntityFuncs.Remove(@pEntity);
