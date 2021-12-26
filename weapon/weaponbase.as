@@ -95,7 +95,7 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
             Vector vecOrigin = self.pev.origin;
             vecOrigin.z += flFlagHeight;
             CBaseEntity@ pEntity = g_EntityFuncs.Create(WEAPONFLAG_REGISTERNAME, vecOrigin, self.pev.angles, true, self.edict());
-            pEntity.pev.fuser1 = flFlagHeight;
+            pEntity.pev.fov = flFlagHeight;
             pEntity.pev.model = szFloatFlagModel;
             g_EntityFuncs.DispatchSpawn( pEntity.edict() );
             pFlagEntity = EHandle(pEntity);

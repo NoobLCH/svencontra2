@@ -1,14 +1,16 @@
 const string WEAPONFLAG_REGISTERNAME = "info_weaponflag";
 class CWeaponFlag : ScriptBaseAnimating{
-    void Spawn(){	
+    private EHandle pOwner = null;
+    void Spawn(){
         if(self.pev.owner is null)
             return;
+        pOwner = EHandle(g_EntityFuncs.Instance(self.pev.owner));
         Precache();
 		pev.movetype = MOVETYPE_NOCLIP;
 		pev.solid = SOLID_NOT;
         self.pev.framerate = 1.0f;
-        if(self.pev.fuser1 <= 0)
-            self.pev.fuser1 = 24;
+        if(self.pev.fov <= 0)
+            self.pev.fov = 24;
         self.pev.scale = 0.25;
         self.pev.rendermode = kRenderTransAlpha;
         self.pev.renderamt = 255;
@@ -18,8 +20,13 @@ class CWeaponFlag : ScriptBaseAnimating{
         self.pev.nextthink = g_Engine.time + 0.05f;
 	}
     void Think(){
-        Vector vecOrigin = self.pev.owner.vars.origin;
-        vecOrigin.z += self.pev.fuser1;
+        if(!pOwner.IsValid()){
+            SetThink(ThinkFunction(self.SUB_Remove));
+            self.pev.nextthink = g_Engine.time;
+            return;
+        }
+        Vector vecOrigin = pOwner.GetEntity().pev.origin;
+        vecOrigin.z += self.pev.fov;
         g_EntityFuncs.SetOrigin( self, vecOrigin );
         self.pev.nextthink = g_Engine.time + 0.05f;
     }
