@@ -2,7 +2,7 @@ const string WEAPONFLAG_REGISTERNAME = "info_weaponflag";
 class CWeaponFlag : ScriptBaseAnimating{
     private EHandle pOwner = null;
     void Spawn(){
-        if(self.pev.owner is null)
+        if(@self.pev.owner is null)
             return;
         pOwner = EHandle(g_EntityFuncs.Instance(self.pev.owner));
         Precache();

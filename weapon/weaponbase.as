@@ -96,10 +96,11 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
             vecOrigin.z += flFlagHeight;
             CBaseEntity@ pEntity = g_EntityFuncs.Create(WEAPONFLAG_REGISTERNAME, vecOrigin, self.pev.angles, true, self.edict());
             pEntity.pev.fov = flFlagHeight;
-            pEntity.pev.model = szFloatFlagModel;
+            g_EntityFuncs.SetModel(@pEntity, szFloatFlagModel);
             g_EntityFuncs.DispatchSpawn( pEntity.edict() );
             pFlagEntity = EHandle(pEntity);
         }
+        BaseClass.Materialize();
     }
     void Holster( int skiplocal /* = 0 */ ){	
 		SetThink( null );
