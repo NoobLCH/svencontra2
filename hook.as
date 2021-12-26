@@ -5,3 +5,10 @@ HookReturnCode EntityCreated( CBaseEntity@ pEntity ){
         aryMonsterList.insertLast(EHandle(@pEntity));
     return HOOK_CONTINUE;
 }
+
+HookReturnCode ClientPutInServer( CBasePlayer@ pPlayer ){
+    if(pPlayer is null)
+        return HOOK_CONTINUE;
+    PlayerDMGTweak();
+    return HOOK_CONTINUE;
+}

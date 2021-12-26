@@ -28,7 +28,7 @@
         szFireSound = "weapons/svencontra2/shot_ar.wav";
 
         flBulletSpeed = 1900;
-        iDamage = 15;
+        iDamage = g_WeaponDMG.AR;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(24,8,-5);

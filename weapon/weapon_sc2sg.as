@@ -27,7 +27,7 @@ class  weapon_sc2sg : CBaseContraWeapon{
         szFireSound = "weapons/svencontra2/shot_sg.wav";
 
         flBulletSpeed = 2000;
-        iDamage = 18;
+        iDamage = g_WeaponDMG.SG;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
         iShellBounce = TE_BOUNCE_SHOTSHELL;

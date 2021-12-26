@@ -1,6 +1,7 @@
 #include "utility"
 #include "monsterdeath"
 #include "hook"
+#include "dynamicdifficult"
 
 #include "entity/info_weaponflag"
 #include "entity/func_noprojclip"
@@ -37,6 +38,7 @@ void MapInit(){
     PrecacheAllMonsterDeath();
 
     g_Hooks.RegisterHook( Hooks::Game::EntityCreated, @EntityCreated );
+    g_Hooks.RegisterHook( Hooks::Player::ClientPutInServer, @ClientPutInServer );
     g_Scheduler.SetInterval("SearchAndDestoryMonster", 0.01f, g_Scheduler.REPEAT_INFINITE_TIMES);
     
     g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2ar", "weapon_sc2ar" );

@@ -27,7 +27,7 @@
         szFireSound = "weapons/svencontra2/shot_fg.wav";
 
         flBulletSpeed = 2200;
-        iDamage = 55;
+        iDamage = g_WeaponDMG.FG;
         vecPunchX = Vector2D(-4,5);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(0,2,0);
@@ -57,7 +57,7 @@
         pBullet.pev.dmg = iDamage;
         pBullet.pev.model = "sprites/svencontra2/bullet_fg.spr";
         //爆炸SPR, 爆炸音效, SPR缩放, 伤害范围, 伤害
-        pBullet.SetExpVar("sprites/svencontra2/bullet_fghit.spr", "weapons/svencontra2/shot_fghit.wav", 10, 128, 100);
+        pBullet.SetExpVar("sprites/svencontra2/bullet_fghit.spr", "weapons/svencontra2/shot_fghit.wav", 10, 128, g_WeaponDMG.FGE);
         pBullet.pev.velocity = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES ) * flBulletSpeed;
         pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
         @pBullet.pTouchFunc = @ProjBulletTouch::ExplodeTouch;
