@@ -102,6 +102,10 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
         }
         BaseClass.Materialize();
     }
+    void UpdateOnRemove(){
+        if(pFlagEntity.IsValid())
+            g_EntityFuncs.Remove(pFlagEntity);
+    }
     void Holster( int skiplocal /* = 0 */ ){	
 		SetThink( null );
         BaseClass.Holster();
