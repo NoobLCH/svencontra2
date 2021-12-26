@@ -22,6 +22,7 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
     private float flDestoryTime;
     private int iFlyReverseTime = 4;
     private float flBaloonUpSpeed = 16.0f;
+    private float flInitVelocityZ;
 
     bool KeyValue(const string& in szKeyName, const string& in szValue){
         if(szKeyName == "kSpawnItem"){
@@ -67,16 +68,16 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
         g_Game.PrecacheGeneric( "sound/" + szSoundPath );
     }
     void Init(){
-        CBaseEntity@ pEntity = g_EntityFuncs.FindEntityByTargetname(@pEntity, self.pev.target);
+        CBaseEntity@ pEntity = self.GetNextTarget();
         if(@pEntity is null){
             g_EntityFuncs.Remove(self);
             return;
         }
         Vector vecLine = pEntity.pev.origin - self.pev.origin;
         self.pev.angles = Math.VecToAngles(vecLine.Normalize());
-        flDestoryTime = g_Engine.time + vecLine.Length() / self.pev.speed;
+        flDestoryTime = vecLine.Length() / self.pev.speed;
         self.pev.velocity = vecLine.Normalize() * self.pev.speed;
-
+        flInitVelocityZ = self.pev.velocity.z;
         self.pev.velocity.z += flBaloonUpSpeed;
         self.pev.nextthink = g_Engine.time + iFlyReverseTime / 2;
 
@@ -89,6 +90,12 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
 
 		g_EntityFuncs.SetModel( self, string( self.pev.model ).IsEmpty() ? "models/common/lambda.mdl" : string(self.pev.model) );
         g_EntityFuncs.SetSize( self.pev, Vector(-16,-16,-16), Vector(16, 16, 16));
+
+        g_Scheduler.SetTimeout(this, "Remove", flDestoryTime);
+    }
+    void Remove(){
+        if(self !is null)
+            g_EntityFuncs.Remove(self);
     }
     void Spawn(){
         if(szSpawnItem.IsEmpty())
@@ -109,13 +116,9 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
         Init();
     }
     void Think(){
-        if(int(g_Engine.time) % iFlyReverseTime == 0){
-            self.pev.velocity.z += 2 * (bInUp ? -flBaloonUpSpeed : flBaloonUpSpeed);
-            bInUp = !bInUp;
-        }
-        if(g_Engine.time >= flDestoryTime)
-            g_EntityFuncs.Remove(self);
-        self.pev.nextthink = g_Engine.time + 0.1f;
+        self.pev.velocity.z = flInitVelocityZ + (bInUp ? -flBaloonUpSpeed : flBaloonUpSpeed);
+        bInUp = !bInUp;      
+        self.pev.nextthink = g_Engine.time + iFlyReverseTime;
     }
     void Killed(entvars_t@ pevAttacker, int iGib){
         g_SoundSystem.EmitSoundDyn( self.edict(), CHAN_WEAPON, szSoundPath, 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
