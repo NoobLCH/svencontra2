@@ -28,7 +28,7 @@
         szFireSound = "weapons/svencontra2/shot_ar.wav";
 
         flBulletSpeed = 1900;
-        iDamage = g_WeaponDMG.AR;
+        flDamage = g_WeaponDMG.AR;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(24,8,-5);
@@ -65,7 +65,7 @@
         pBullet.pev.model = "sprites/svencontra2/bullet_ar.spr";
         pBullet.pev.velocity = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES ) * flBulletSpeed;
         pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
-        pBullet.pev.dmg = iDamage;
+        pBullet.pev.dmg = flDamage;
         g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
     }
     void RechargeThink(){

@@ -27,7 +27,7 @@ class  weapon_sc2sg : CBaseContraWeapon{
         szFireSound = "weapons/svencontra2/shot_sg.wav";
 
         flBulletSpeed = 2000;
-        iDamage = g_WeaponDMG.SG;
+        flDamage = g_WeaponDMG.SG;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
         iShellBounce = TE_BOUNCE_SHOTSHELL;
@@ -54,7 +54,7 @@ class  weapon_sc2sg : CBaseContraWeapon{
             pBullet.pev.model = "sprites/svencontra2/bullet_sg.spr";
             pBullet.pev.velocity = vecAiming * flBulletSpeed + r * g_Engine.v_right + u *  g_Engine.v_up;
             pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
-            pBullet.pev.dmg = iDamage;
+            pBullet.pev.dmg = flDamage;
             g_EntityFuncs.DispatchSpawn(pBullet.self.edict());
      }
      void CreateProj(int pellet = 1) override{

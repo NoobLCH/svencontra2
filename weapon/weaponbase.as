@@ -30,7 +30,7 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
     protected Vector2D vecPunchX;
     protected Vector2D vecPunchY;
     protected float flBulletSpeed;
-    protected int iDamage;
+    protected float flDamage;
     protected TE_BOUNCE iShellBounce = TE_BOUNCE_SHELL;
 
     protected Vector vecEjectOffset;

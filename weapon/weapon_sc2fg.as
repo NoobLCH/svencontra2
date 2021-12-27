@@ -27,7 +27,7 @@
         szFireSound = "weapons/svencontra2/shot_fg.wav";
 
         flBulletSpeed = 2200;
-        iDamage = g_WeaponDMG.FG;
+        flDamage = g_WeaponDMG.FG;
         vecPunchX = Vector2D(-4,5);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(0,2,0);
@@ -54,7 +54,7 @@
         CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
         g_EntityFuncs.SetOrigin( pBullet.self, m_pPlayer.GetGunPosition() );
         @pBullet.pev.owner = @m_pPlayer.edict();
-        pBullet.pev.dmg = iDamage;
+        pBullet.pev.dmg = flDamage;
         pBullet.pev.model = "sprites/svencontra2/bullet_fg.spr";
         //爆炸SPR, 爆炸音效, SPR缩放, 伤害范围, 伤害
         pBullet.SetExpVar("sprites/svencontra2/bullet_fghit.spr", "weapons/svencontra2/shot_fghit.wav", 10, 128, g_WeaponDMG.FGE);

@@ -1,42 +1,26 @@
-const string CVAR_ARNAME = "sk_plr_sc2ar";
-const string CVAR_SGNAME = "sk_plr_sc2sg";
-const string CVAR_MGNAME = "sk_plr_sc2mg";
-const string CVAR_FGNAME = "sk_plr_sc2fg";
-const string CVAR_FGENAME = "sk_plr_sc2fge";
 const string CVAR_KNNAME = "sk_plr_crowbar";
-
-CCVar@ pCVarAR = CCVar(CVAR_ARNAME, 15, "", ConCommandFlag::AdminOnly);
-CCVar@ pCVarSG = CCVar(CVAR_SGNAME, 18, "", ConCommandFlag::AdminOnly);
-CCVar@ pCVarMG = CCVar(CVAR_MGNAME, 25, "", ConCommandFlag::AdminOnly);
-CCVar@ pCVarFG = CCVar(CVAR_FGNAME, 55, "", ConCommandFlag::AdminOnly);
-CCVar@ pCVarFGE = CCVar(CVAR_FGENAME, 100, "", ConCommandFlag::AdminOnly);
-
 class CWeaponDMGBase {
-    int AR = int(g_EngineFuncs.CVarGetFloat(CVAR_ARNAME));
-    int SG = int(g_EngineFuncs.CVarGetFloat(CVAR_SGNAME));
-    int MG = int(g_EngineFuncs.CVarGetFloat(CVAR_MGNAME));
-    int FG = int(g_EngineFuncs.CVarGetFloat(CVAR_FGNAME));
-    int FGE = int(g_EngineFuncs.CVarGetFloat(CVAR_FGENAME));
-    int KN = int(g_EngineFuncs.CVarGetFloat(CVAR_KNNAME));
-
+    float AR = 15;
+    float SG = 18;
+    float MG = 25;
+    float FG = 55;
+    float FGE = 100;
+    float KN = 15;
     //默认值
-    int ARD = AR;
-    int SGD = SG;
-    int MGD = MG;
-    int FGD = FG;
-    int FGED = FGE;
-    int KND = KN;
+    float ARD = AR;
+    float SGD = SG;
+    float MGD = MG;
+    float FGD = FG;
+    float FGED = FGE;
+    float KND = KN;
     void Tweak(float factor){
-        g_EngineFuncs.CVarSetFloat(CVAR_ARNAME, factor * ARD);
-        g_EngineFuncs.CVarSetFloat(CVAR_SGNAME, factor * SGD);
-        g_EngineFuncs.CVarSetFloat(CVAR_MGNAME, factor * MGD);
-        g_EngineFuncs.CVarSetFloat(CVAR_FGNAME, factor * FGD);
-        g_EngineFuncs.CVarSetFloat(CVAR_FGENAME, factor * FGED);
-        KN = int(factor * KND);
+        this.AR = factor * this.ARD;
+        this.SG = factor * this.SGD;
+        this.MG = factor * this.MGD;
+        this.FG = factor * this.FGD;
+        this.FGE = factor * this.FGED;
+        this.KN = factor * this.KND;
         g_EngineFuncs.CVarSetFloat(CVAR_KNNAME, this.KN);
-    }
-    void Reset(){
-        Tweak(1.0f);
     }
 }
 CWeaponDMGBase g_WeaponDMG;
@@ -49,20 +33,62 @@ void PlayerDMGTweak(){
             iNowPlayerNum++;
         }
     }
-    g_WeaponDMG.Reset();
-    //1 = 1.5
-    //2 = 1
-    //3 = 0.83
-    //4 = 0.75
-    //5 = 0.7
-    //6 = 0.66
-    //7 = 0.64
-    //8 = 0.625
-    //9 = 0.611
-    //10 = 0.6
-    //11 = 0.59
-    //.......
-    //+∞ = 0.5
-    float flTweakFactor = 1.0f / (iNowPlayerNum) + 0.5f;
+    /*
+    * > x=c(1,2,3,4,5,6,7,8,9,10)
+    * > y=c(1,1,1,0.8,0.75,0.72,0.7,0.68,0.65,0.6)
+    * > head(df)
+    *                                             
+    * 1 function (x, df1, df2, ncp, log = FALSE)    
+    * 2 {                                           
+    * 3     if (missing(ncp))                       
+    * 4         .Call(C_df, x, df1, df2, log)       
+    * 5     else .Call(C_dnf, x, df1, df2, ncp, log)
+    * 6 }                                           
+    * > df=data.frame(x=x,y=y)
+    * > pra.lm=lm(y~log(x),data=df)
+    * > a=coefficients(pra.lm)[2]
+    * > b=coefficients(pra.lm)[1]
+    * > summary(pra.lm)
+    * 
+    * Call:
+    * lm(formula = y ~ log(x), data = df)
+    * 
+    * Residuals:
+    *     Min        1Q    Median        3Q       Max 
+    * -0.086297 -0.019139 -0.009815  0.000070  0.129213 
+    * 
+    * Coefficients:
+    *             Estimate Std. Error t value Pr(>|t|)    
+    * (Intercept)  1.08630    0.04530  23.981 9.74e-09 ***
+    * log(x)      -0.19617    0.02724  -7.201 9.24e-05 ***
+    * ---
+    * Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+    * 
+    * Residual standard error: 0.05991 on 8 degrees of freedom
+    * Multiple R-squared:  0.8663,	Adjusted R-squared:  0.8496 
+    * F-statistic: 51.86 on 1 and 8 DF,  p-value: 9.235e-05
+    * 
+    * > a
+    *     log(x) 
+    * -0.1961658 
+    * > b
+    * (Intercept) 
+    * 1.086297 
+    * > n=do.call(cbind,foreach(var=1:32) %do% (a*log(var)+b))
+    * > n
+    *         [,1]      [,2]      [,3]      [,4]      [,5]     [,6]
+    * log(x) 1.086297 0.9503252 0.8707868 0.8143534 0.7705802 0.734815
+    *             [,7]      [,8]      [,9]     [,10]     [,11]     [,12]
+    * log(x) 0.7045759 0.6783816 0.6552766 0.6346085 0.6159119 0.5988432
+    *         [,13]     [,14]     [,15]     [,16]     [,17]     [,18]
+    * log(x) 0.5831416 0.5686041 0.5550701 0.5424098 0.5305173 0.5193048
+    *         [,19]     [,20]     [,21]     [,22]     [,23]     [,24]
+    * log(x) 0.5086987 0.4986367 0.4890657 0.4799401 0.4712202 0.4628714
+    *         [,25]     [,26]     [,27]     [,28]     [,29]     [,30]
+    * log(x) 0.4548636 0.4471698 0.4397664 0.4326323 0.4257486 0.4190983
+    *         [,31]    [,32]
+    * log(x) 0.4126661 0.406438
+    */
+    float flTweakFactor = iNowPlayerNum <= 3 ? 1.0f : (-0.1961658f * log(iNowPlayerNum) + 1.086297f);
     g_WeaponDMG.Tweak(flTweakFactor);
 }

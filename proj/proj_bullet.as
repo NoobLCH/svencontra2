@@ -17,7 +17,7 @@ namespace ProjBulletTouch{
             g_Utility.BloodDrips(pThis.self.pev.origin, g_Utility.RandomBloodVector(), pOther.BloodColor(), Math.RandomLong(5,10));
             pOther.TakeDamage( pThis.self.pev, pThis.self.pev.owner.vars, pThis.self.pev.dmg, pThis.iDamageType);
         }
-        g_WeaponFuncs.RadiusDamage(pThis.self.pev.origin, pThis.self.pev, pThis.self.pev.owner.vars, pThis.iExpDmg, pThis.iExpRadius, -1, pThis.iDamageType);
+        g_WeaponFuncs.RadiusDamage(pThis.self.pev.origin, pThis.self.pev, pThis.self.pev.owner.vars, pThis.flExpDmg, pThis.iExpRadius, -1, pThis.iDamageType);
         NetworkMessage m(MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY, null);
             m.WriteByte(TE_EXPLOSION);
             m.WriteCoord(pThis.self.pev.origin.x);
@@ -45,16 +45,16 @@ class CProjBullet : ScriptBaseAnimating{
     string szExpSound = "weapons/svencontra2/shot_fghit.wav";
     int iExpSclae;
     int iExpRadius;
-    int iExpDmg;
+    float flExpDmg;
 
     BulletTouchCallback@ pTouchFunc = null;
 
-    void SetExpVar(string _s, string _es, int _sc, int _r, int _d){
+    void SetExpVar(string _s, string _es, int _sc, int _r, float _d){
         szExpSpr = _s;
         szExpSound = _es;
         iExpSclae = _sc;
         iExpRadius = _r;
-        iExpDmg = _d;
+        flExpDmg = _d;
     }
 
     void Spawn(){	

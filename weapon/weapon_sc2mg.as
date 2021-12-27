@@ -29,7 +29,7 @@ class  weapon_sc2mg : CBaseContraWeapon{
         szFireSound = "weapons/svencontra2/shot_mg.wav";
 
         flBulletSpeed = 2000;
-        iDamage = g_WeaponDMG.MG;
+        flDamage = g_WeaponDMG.MG;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(24,8,-5);
@@ -60,7 +60,7 @@ class  weapon_sc2mg : CBaseContraWeapon{
         pBullet.pev.model = "sprites/svencontra2/bullet_mg.spr";
         pBullet.pev.velocity = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES ) * flBulletSpeed;
         pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
-        pBullet.pev.dmg = iDamage;
+        pBullet.pev.dmg = flDamage;
         g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
     }
     void SecondaryAttack() override{
