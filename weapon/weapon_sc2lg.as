@@ -1,4 +1,7 @@
 namespace ProjBulletTouch{
+    void LaserGunFirstShotTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
+        pThis.pev.velocity = g_vecZero;
+    }
     void LaserGunShotTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
         ProjBulletTouch::DefaultDirectTouch(@pThis, @pOther);
         if(pOther.IsBSPModel()){
@@ -10,9 +13,6 @@ namespace ProjBulletTouch{
             g_Utility.Sparks(vecStart);
         }
         ProjBulletTouch::DefaultPostTouch(@pThis, @pOther);
-    }
-    void LaserGunFirstShotTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
-        pThis.pev.velocity = g_vecZero;
     }
     void LaserGunLastShotTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
         ProjBulletTouch::DefaultDirectTouch(@pThis, @pOther);
