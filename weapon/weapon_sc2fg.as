@@ -1,8 +1,8 @@
  class  weapon_sc2fg : CBaseContraWeapon{
      weapon_sc2fg(){
        szVModel = "models/svencontra2/v_sc2fg.mdl";
-		szPModel = "models/svencontra2/wp_sc2fg.mdl";
-		szWModel = "models/svencontra2/wp_sc2fg.mdl";
+        szPModel = "models/svencontra2/wp_sc2fg.mdl";
+        szWModel = "models/svencontra2/wp_sc2fg.mdl";
         szFloatFlagModel = "sprites/svencontra2/icon_sc2fg.spr";
 
         szShellModel = "";
@@ -34,19 +34,19 @@
      }
      void Precache() override{
         g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_fg.wav" );
-		g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_fghit.wav" );
-		g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_fg.wav" );
-		g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_fghit.wav" );
-		
+        g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_fghit.wav" );
+        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_fg.wav" );
+        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_fghit.wav" );
+        
         g_Game.PrecacheModel("sprites/svencontra2/hud_sc2fg.spr");
         g_Game.PrecacheModel("sprites/svencontra2/bullet_fg.spr");
         g_Game.PrecacheModel("sprites/svencontra2/bullet_fghit.spr");
 
-		g_Game.PrecacheGeneric( "sprites/svencontra2/hud_sc2fg.spr" );	
-		g_Game.PrecacheGeneric( "sprites/svencontra2/bullet_fg.spr" );	
-		g_Game.PrecacheGeneric( "sprites/svencontra2/bullet_fghit.spr" );
+        g_Game.PrecacheGeneric( "sprites/svencontra2/hud_sc2fg.spr" );    
+        g_Game.PrecacheGeneric( "sprites/svencontra2/bullet_fg.spr" );    
+        g_Game.PrecacheGeneric( "sprites/svencontra2/bullet_fghit.spr" );
 
-		g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2fg.txt" );
+        g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2fg.txt" );
 
         CBaseContraWeapon::Precache();
      }

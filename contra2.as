@@ -42,13 +42,13 @@ void MapInit(){
     g_Scheduler.SetInterval("SearchAndDestoryMonster", 0.01f, g_Scheduler.REPEAT_INFINITE_TIMES);
     
     g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2ar", "weapon_sc2ar" );
-	g_ItemRegistry.RegisterWeapon( "weapon_sc2ar", "svencontra2", "9mm", "ARgrenades" );
+    g_ItemRegistry.RegisterWeapon( "weapon_sc2ar", "svencontra2", "9mm", "ARgrenades" );
     g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2fg", "weapon_sc2fg" );
-	g_ItemRegistry.RegisterWeapon( "weapon_sc2fg", "svencontra2", "rockets");
+    g_ItemRegistry.RegisterWeapon( "weapon_sc2fg", "svencontra2", "rockets");
     g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2mg", "weapon_sc2mg" );
-	g_ItemRegistry.RegisterWeapon( "weapon_sc2mg", "svencontra2", "556");
+    g_ItemRegistry.RegisterWeapon( "weapon_sc2mg", "svencontra2", "556");
     g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2sg", "weapon_sc2sg" );
-	g_ItemRegistry.RegisterWeapon( "weapon_sc2sg", "svencontra2", "buckshot");
+    g_ItemRegistry.RegisterWeapon( "weapon_sc2sg", "svencontra2", "buckshot");
 
     g_SurvivalMode.EnableMapSupport();
 }

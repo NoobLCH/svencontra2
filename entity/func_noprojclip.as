@@ -6,14 +6,14 @@ class CNoProjClip : ScriptBaseEntity{
             self.pev.angles.y = 360;
         if (self.pev.angles != g_vecZero){
             if (self.pev.angles == Vector(0, -1, 0))
-		        self.pev.movedir = Vector(0, 0, 1);
-	        else if (self.pev.angles == Vector(0, -2, 0))
-		        self.pev.movedir = Vector(0, 0, -1);
-	        else{
+                self.pev.movedir = Vector(0, 0, 1);
+            else if (self.pev.angles == Vector(0, -2, 0))
+                self.pev.movedir = Vector(0, 0, -1);
+            else{
                 Math.MakeVectors(self.pev.angles);
                 self.pev.movedir = g_Engine.v_forward;
             }
-	        self.pev.angles = g_vecZero;
+            self.pev.angles = g_vecZero;
         }
         self.pev.solid = SOLID_TRIGGER;
         self.pev.movetype = MOVETYPE_NONE;
@@ -59,13 +59,13 @@ class CNoProjClip : ScriptBaseEntity{
     void Use(CBaseEntity@ pActivator, CBaseEntity@ pCaller, USE_TYPE useType, float flValue = 0.0f){
         if (self.pev.solid == SOLID_NOT){
             self.pev.solid = SOLID_TRIGGER;
-		    g_Engine.force_retouch+=1;
-	    }
-	    else
-		    self.pev.solid = SOLID_NOT;
-	    g_EntityFuncs.SetOrigin( self, self.pev.origin );
+            g_Engine.force_retouch+=1;
+        }
+        else
+            self.pev.solid = SOLID_NOT;
+        g_EntityFuncs.SetOrigin( self, self.pev.origin );
     }
-    int	ObjectCaps() { 
+    int    ObjectCaps() { 
         return BaseClass.ObjectCaps() & ~FCAP_ACROSS_TRANSITION; 
     }
 }

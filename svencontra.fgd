@@ -1,230 +1,230 @@
 //从sven-coop.fgd里复制的基类
 @BaseClass = Mandatory
 [
-	ondestroyfn(string) : "OnDestroy Function"
+    ondestroyfn(string) : "OnDestroy Function"
 ]
 @BaseClass base(Mandatory) = Targetname
 [
-	targetname(target_source) : "Name"
+    targetname(target_source) : "Name"
 ]
 @BaseClass = Target
 [
-	target(target_destination) : "Target"
+    target(target_destination) : "Target"
 ]
 @BaseClass = Angles
 [
-	angles(string) : "Pitch Yaw Roll (X Y Z)" : "0 0 0"
+    angles(string) : "Pitch Yaw Roll (X Y Z)" : "0 0 0"
 ]
 @BaseClass = Appearflags
 [
-	spawnflags(Flags) =
-	[
-		2048 : "Not in Deathmatch" : 0
-	]
+    spawnflags(Flags) =
+    [
+        2048 : "Not in Deathmatch" : 0
+    ]
 ]
 @BaseClass size(0 0 0, 32 32 32) color(80 0 200) base(Targetname, Appearflags, Angles) = Pickup
 [
-	spawnflags(Flags) =
-	[
-		128 : "TOUCH Only" : 0
-		256 : "USE Only" : 0
-		512 : "Can Use w/o LoS" : 0
-		1024: "Disable Respawn" : 0
-	]
-	renderfx(choices) : "Render FX" : 0 =
-	[
-		0: "Normal"
-		1: "Slow Pulse"
-		2: "Fast Pulse"
-		3: "Slow Wide Pulse"
-		4: "Fast Wide Pulse"
-		9: "Slow Strobe"
-		10: "Fast Strobe"
-		11: "Faster Strobe"
-		12: "Slow Flicker"
-		13: "Fast Flicker"
-		5: "Slow Fade Away"
-		6: "Fast Fade Away"
-		7: "Slow Become Solid"
-		8: "Fast Become Solid"
-		14: "Constant Glow"
-		15: "Distort"
-		16: "Hologram (Distort + fade)"
-		19: "Glow Shell"
-	]
-	rendermode(choices) : "Render Mode" : 0 =
-	[
-		0: "Normal"
-		1: "Color"
-		2: "Texture"
-		3: "Glow"
-		4: "Solid"
-		5: "Additive"
-	]
-	renderamt(integer) : "FX Amount (1 - 255)"
-	rendercolor(color255) : "FX Color (R G B)" : "0 0 0"
-	movetype(choices) : "Gravity Setting" : 0 =
-	[
-		-1: "Unmoveable"
-		0: "Fall to the ground (default)"
-		5: "Hover in the air"
-		8: "Hover in the air, ignore brush collision"
-	]
+    spawnflags(Flags) =
+    [
+        128 : "TOUCH Only" : 0
+        256 : "USE Only" : 0
+        512 : "Can Use w/o LoS" : 0
+        1024: "Disable Respawn" : 0
+    ]
+    renderfx(choices) : "Render FX" : 0 =
+    [
+        0: "Normal"
+        1: "Slow Pulse"
+        2: "Fast Pulse"
+        3: "Slow Wide Pulse"
+        4: "Fast Wide Pulse"
+        9: "Slow Strobe"
+        10: "Fast Strobe"
+        11: "Faster Strobe"
+        12: "Slow Flicker"
+        13: "Fast Flicker"
+        5: "Slow Fade Away"
+        6: "Fast Fade Away"
+        7: "Slow Become Solid"
+        8: "Fast Become Solid"
+        14: "Constant Glow"
+        15: "Distort"
+        16: "Hologram (Distort + fade)"
+        19: "Glow Shell"
+    ]
+    rendermode(choices) : "Render Mode" : 0 =
+    [
+        0: "Normal"
+        1: "Color"
+        2: "Texture"
+        3: "Glow"
+        4: "Solid"
+        5: "Additive"
+    ]
+    renderamt(integer) : "FX Amount (1 - 255)"
+    rendercolor(color255) : "FX Color (R G B)" : "0 0 0"
+    movetype(choices) : "Gravity Setting" : 0 =
+    [
+        -1: "Unmoveable"
+        0: "Fall to the ground (default)"
+        5: "Hover in the air"
+        8: "Hover in the air, ignore brush collision"
+    ]
 ]
 @BaseClass = CustomRespawnDelay
 [
-	m_flCustomRespawnTime(string) : "Custom respawn time"
+    m_flCustomRespawnTime(string) : "Custom respawn time"
 ]
 @BaseClass size(-16 -16 0, 16 16 32) color(2 64 240) base(Pickup, CustomRespawnDelay) = Weapon
 [
-	dmg(integer) : "Custom Damage" : 0
+    dmg(integer) : "Custom Damage" : 0
 
-	wpn_v_model(studio) : "Custom V_Model" : ""
-	wpn_w_model(studio) : "Custom W_Model" : ""
-	wpn_p_model(studio) : "Custom P_Model" : ""
+    wpn_v_model(studio) : "Custom V_Model" : ""
+    wpn_w_model(studio) : "Custom W_Model" : ""
+    wpn_p_model(studio) : "Custom P_Model" : ""
 
-	soundlist(string) : "Sound Replacement File"
+    soundlist(string) : "Sound Replacement File"
 
-	CustomSpriteDir(string) : "Custom sprite directory"
+    CustomSpriteDir(string) : "Custom sprite directory"
 
-	IsNotAmmoItem(choices) : "Is Ammo Item" : 0 =
-	[
-		0 : "Yes"
-		1 : "No"
-	]
+    IsNotAmmoItem(choices) : "Is Ammo Item" : 0 =
+    [
+        0 : "Yes"
+        1 : "No"
+    ]
 ]
 @BaseClass base(Target) = Targetx
 [
-	delay(string) : "Delay Before Trigger" : "0"
-	killtarget(target_destination) : "Kill Target"
+    delay(string) : "Delay Before Trigger" : "0"
+    killtarget(target_destination) : "Kill Target"
 ]
 @BaseClass = ExclusiveHold
 [
-	exclusivehold(choices) : "Exclusive Hold" : 0 =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
+    exclusivehold(choices) : "Exclusive Hold" : 0 =
+    [
+        0 : "No"
+        1 : "Yes"
+    ]
 ]
 @BaseClass = FilterIn
 [
-	tinfilter(string) : "Name In Filter"
-	tinfiltertype(choices) : "Name In Filter Type" : 0 =
-	[
-		0: "Exclude"
-		1: "Include"
-	]
+    tinfilter(string) : "Name In Filter"
+    tinfiltertype(choices) : "Name In Filter Type" : 0 =
+    [
+        0: "Exclude"
+        1: "Include"
+    ]
 
-	cinfilter(string) : "Class In Filter"
-	cinfiltertype(choices) : "Class In Filter Type" : 0 =
-	[
-		0: "Exclude"
-		1: "Include"
-	]
+    cinfilter(string) : "Class In Filter"
+    cinfiltertype(choices) : "Class In Filter Type" : 0 =
+    [
+        0: "Exclude"
+        1: "Include"
+    ]
 ]
 @BaseClass = FilterOut
 [
-	toutfilter(string) : "Name Out Filter"
-	toutfiltertype(choices) : "Name Out Filter Type" : 0 =
-	[
-		0: "Exclude"
-		1: "Include"
-	]
+    toutfilter(string) : "Name Out Filter"
+    toutfiltertype(choices) : "Name Out Filter Type" : 0 =
+    [
+        0: "Exclude"
+        1: "Include"
+    ]
 
-	coutfilter(string) : "Class Out Filter"
-	coutfiltertype(choices) : "Class Out Filter Type" : 0 =
-	[
-		0: "Exclude"
-		1: "Include"
-	]
+    coutfilter(string) : "Class Out Filter"
+    coutfiltertype(choices) : "Class Out Filter Type" : 0 =
+    [
+        0: "Exclude"
+        1: "Include"
+    ]
 ]
 @BaseClass = ZHLTbmodel
 [
-	zhlt_usemodel(string) : "ZHLT Template Model Target"
-	zhlt_copylight(string) : "ZHLT Copy Lighting From Target"
-	zhlt_noclip(choices) : "ZHLT Disable Clipping" : 0 =
-	[
-		0 : "Default"
-		1 : "Always non-solid"
-	]
-	zhlt_invisible(choices) : "ZHLT Invisible" : 0 =
-	[
-		0 : "Visible (default)"
-		1 : "Invisible"
-	]
-	zhlt_customshadow(string) : "ZHLT Custom Shadow (when opaque)"
-	zhlt_embedlightmap(choices) : "ZHLT Embed Light Map (when translucent)" : 0 =
-	[
-		0 : "No (default)"
-		1 : "Yes"
-	]
+    zhlt_usemodel(string) : "ZHLT Template Model Target"
+    zhlt_copylight(string) : "ZHLT Copy Lighting From Target"
+    zhlt_noclip(choices) : "ZHLT Disable Clipping" : 0 =
+    [
+        0 : "Default"
+        1 : "Always non-solid"
+    ]
+    zhlt_invisible(choices) : "ZHLT Invisible" : 0 =
+    [
+        0 : "Visible (default)"
+        1 : "Invisible"
+    ]
+    zhlt_customshadow(string) : "ZHLT Custom Shadow (when opaque)"
+    zhlt_embedlightmap(choices) : "ZHLT Embed Light Map (when translucent)" : 0 =
+    [
+        0 : "No (default)"
+        1 : "Yes"
+    ]
 ]
 @BaseClass base(Targetx, Targetname, FilterIn, FilterOut, InventoryRules, ZHLTbmodel, Appearflags) = Trigger
 [
-	netname(target_destination) : "Target Path"
-	master(string) : "Master"
-	sounds(choices) : "Sound style" : 0 =
-	[
-		0 : "No Sound"
-	]
-	message(string) : "Message (set sound too!)"
-	tiny_monsters(Choices) : "Allow tiny monsters (insects/hornets)" : 0 =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
-	spawnflags(flags) =
-	[
-		1: "Monsters" : 0
-		2: "No Clients" : 0
-		4: "Pushables": 0
-		8: "Everything else": 0
-		16: "Fire On Enter": 0
-		32: "Fire On Exit": 0
-	]
+    netname(target_destination) : "Target Path"
+    master(string) : "Master"
+    sounds(choices) : "Sound style" : 0 =
+    [
+        0 : "No Sound"
+    ]
+    message(string) : "Message (set sound too!)"
+    tiny_monsters(Choices) : "Allow tiny monsters (insects/hornets)" : 0 =
+    [
+        0 : "No"
+        1 : "Yes"
+    ]
+    spawnflags(flags) =
+    [
+        1: "Monsters" : 0
+        2: "No Clients" : 0
+        4: "Pushables": 0
+        8: "Everything else": 0
+        16: "Fire On Enter": 0
+        32: "Fire On Exit": 0
+    ]
 ]
 
 
 //业务代码
 @PointClass base(Targetname, Target) size(-16 -16 -16, 16 16 16) color(255 50 50) = weaponballoon : "Weapon Balloon"
 [
-	spawnflags(Flags) =
-	[
-		1 : "Start On" : 0
-	]
-	model(string) : "Balloon model"
-	speed(string) : "Move Speed" : "400.0"
-	kSpawnItem(string) : "Spawn item name"
-	kSoundPath(string) : "Sound path when destory"
-	kSprPath(string) : "Spr path when destory"
-	kSprScale(string) : "Spr scale when destory" : "1.0"
-	kReverseTime(integer) : "Upside down interval(seconds)" : 4
+    spawnflags(Flags) =
+    [
+        1 : "Start On" : 0
+    ]
+    model(string) : "Balloon model"
+    speed(string) : "Move Speed" : "400.0"
+    kSpawnItem(string) : "Spawn item name"
+    kSoundPath(string) : "Sound path when destory"
+    kSprPath(string) : "Spr path when destory"
+    kSprScale(string) : "Spr scale when destory" : "1.0"
+    kReverseTime(integer) : "Upside down interval(seconds)" : 4
     kBaloonFloatSpeed(string) : "Floating up and down speed" : "120"
-	kShowName(string) : "Show name" : "Weapon Balloon"
+    kShowName(string) : "Show name" : "Weapon Balloon"
 ]
 @PointClass base(Targetname, Target) = trigger_tankdefine : "Tank Rocket Definer"
 [
-	weapon(choices) : "Replaced weapon" : 0 =
-	[
-		1 : "Machine-Small(Yellow)"
-		2 : "Machine-Middle(Red)"
-		3 : "Machine-Heavy-A(Bice)"
-		4 : "Machine-Heavy-B(Yellow)"
+    weapon(choices) : "Replaced weapon" : 0 =
+    [
+        1 : "Machine-Small(Yellow)"
+        2 : "Machine-Middle(Red)"
+        3 : "Machine-Heavy-A(Bice)"
+        4 : "Machine-Heavy-B(Yellow)"
         6 : "Alien-Small(Blue)"
-		7 : "Alien-Small(Red)"
-		5 : "Alien-Middle(Green)"
-		8 : "Alien-Huge(Purple)"
-	]
-	bulletspeed(string) : "Bullet Speed" : "400.0"
+        7 : "Alien-Small(Red)"
+        5 : "Alien-Middle(Green)"
+        8 : "Alien-Huge(Purple)"
+    ]
+    bulletspeed(string) : "Bullet Speed" : "400.0"
 ]
 @SolidClass base(Trigger, Angles) = func_noprojclip : "Trigger push player only"
 [
-	spawnflags(flags) =
-	[
-		1: "Once Only" : 0
-		2: "Start Off" : 0
-	]
-	speed(integer) : "Speed of push" : 40
+    spawnflags(flags) =
+    [
+        1: "Once Only" : 0
+        2: "Start Off" : 0
+    ]
+    speed(integer) : "Speed of push" : 40
 ]
 @PointClass base(Weapon, Targetx, ExclusiveHold) studio("models/svencontra2/wp_sc2ar.mdl") = weapon_sc2ar : "Assault Rifle" []
 @PointClass base(Weapon, Targetx, ExclusiveHold) studio("models/svencontra2/wp_sc2sg.mdl") = weapon_sc2sg : "Shot Gun" []

@@ -65,7 +65,7 @@ void PlayerDMGTweak(){
     * Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
     * 
     * Residual standard error: 0.05991 on 8 degrees of freedom
-    * Multiple R-squared:  0.8663,	Adjusted R-squared:  0.8496 
+    * Multiple R-squared:  0.8663,    Adjusted R-squared:  0.8496 
     * F-statistic: 51.86 on 1 and 8 DF,  p-value: 9.235e-05
     * 
     * > a

@@ -57,15 +57,15 @@ class CProjBullet : ScriptBaseAnimating{
         flExpDmg = _d;
     }
 
-    void Spawn(){	
+    void Spawn(){    
         if(self.pev.owner is null)
             return;
         Precache();
-		pev.movetype = MOVETYPE_FLYMISSILE;
-		pev.solid = SOLID_TRIGGER;
+        pev.movetype = MOVETYPE_FLYMISSILE;
+        pev.solid = SOLID_TRIGGER;
         self.pev.framerate = 1.0f;
         if(self.pev.model == "")
-		    self.pev.model = szSprPath;
+            self.pev.model = szSprPath;
         if(self.pev.speed <= 0)
             self.pev.speed = flSpeed;
         if(self.pev.dmg <= 0)
@@ -78,22 +78,22 @@ class CProjBullet : ScriptBaseAnimating{
         self.pev.renderamt = 255;
         self.pev.rendercolor = Vector(255, 255, 255);
         self.pev.groupinfo = 114514;
-		g_EntityFuncs.SetModel( self, self.pev.model );
-		g_EntityFuncs.SetSize(self.pev, vecHullMin, vecHullMax);
+        g_EntityFuncs.SetModel( self, self.pev.model );
+        g_EntityFuncs.SetSize(self.pev, vecHullMin, vecHullMax);
         g_EntityFuncs.SetOrigin( self, self.pev.origin );
-	}
+    }
 
     void SetAnim( int animIndex ) {
-		self.pev.sequence = animIndex;
-		self.pev.frame = 0;
-		self.ResetSequenceInfo();
-	}
+        self.pev.sequence = animIndex;
+        self.pev.frame = 0;
+        self.ResetSequenceInfo();
+    }
 
     void Precache(){
         BaseClass.Precache();
-		
+        
         string szTemp = string( self.pev.model ).IsEmpty() ? szSprPath : string(self.pev.model);
-		g_Game.PrecacheModel( szTemp );
+        g_Game.PrecacheModel( szTemp );
         g_Game.PrecacheGeneric( szTemp );
 
         g_Game.PrecacheModel( szExpSpr );
@@ -108,10 +108,10 @@ class CProjBullet : ScriptBaseAnimating{
         g_Game.PrecacheGeneric( "sound/" + szExpSound );
     }
     void Touch( CBaseEntity@ pOther ){
-		if( pOther.GetClassname() == self.GetClassname() || pOther.edict() is self.pev.owner)
+        if( pOther.GetClassname() == self.GetClassname() || pOther.edict() is self.pev.owner)
             return;
         pTouchFunc(this, pOther);
-	}
+    }
 }
 
 CProjBullet@ ShootABullet(edict_t@ pOwner, Vector vecOrigin, Vector vecVelocity){

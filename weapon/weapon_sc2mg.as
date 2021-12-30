@@ -36,23 +36,23 @@ class  weapon_sc2mg : CBaseContraWeapon{
      }
      void Precache() override{
         g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_mg.wav" );
-		g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_mg.wav" );
+        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_mg.wav" );
 
         g_Game.PrecacheModel("sprites/svencontra2/hud_sc2mg.spr");
         g_Game.PrecacheModel("sprites/svencontra2/bullet_mg.spr");
-		g_Game.PrecacheGeneric("sprites/svencontra2/hud_sc2mg.spr");
-		g_Game.PrecacheGeneric("sprites/svencontra2/bullet_mg.spr");	
+        g_Game.PrecacheGeneric("sprites/svencontra2/hud_sc2mg.spr");
+        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_mg.spr");    
 
-		g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2mg.txt" );
+        g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2mg.txt" );
 
         CBaseContraWeapon::Precache();
      }
      void Holster( int skiplocal /* = 0 */ ) override{
         iBurstLeft = 0;
         flNextBurstTime = 0;
-		SetThink( null );
+        SetThink( null );
         CBaseContraWeapon::Holster(skiplocal);
-	}
+    }
      void CreateProj(int pellet = 1) override{
         CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
         g_EntityFuncs.SetOrigin( pBullet.self, m_pPlayer.GetGunPosition() );
@@ -70,23 +70,23 @@ class  weapon_sc2mg : CBaseContraWeapon{
         self.m_flNextSecondaryAttack = self.m_flNextPrimaryAttack = WeaponTimeBase() + flSecconaryFireTime;
     }
     void ItemPostFrame(){
-		if( iBurstLeft > 0 ){
-			if( flNextBurstTime < WeaponTimeBase() ){
-				if(m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0){
-					iBurstLeft = 0;
-					return;
-				}
-				else
-				    iBurstLeft--;
-				Fire();
+        if( iBurstLeft > 0 ){
+            if( flNextBurstTime < WeaponTimeBase() ){
+                if(m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0){
+                    iBurstLeft = 0;
+                    return;
+                }
+                else
+                    iBurstLeft--;
+                Fire();
 
-				if( iBurstLeft > 0 )
-					flNextBurstTime = WeaponTimeBase() + flBurstTime;
-				else
-					flNextBurstTime = 0;
-			}
-			return;
-		}
-		BaseClass.ItemPostFrame();
-	}
+                if( iBurstLeft > 0 )
+                    flNextBurstTime = WeaponTimeBase() + flBurstTime;
+                else
+                    flNextBurstTime = 0;
+            }
+            return;
+        }
+        BaseClass.ItemPostFrame();
+    }
 }

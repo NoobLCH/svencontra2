@@ -2,8 +2,8 @@
     bool bInFiring = false;
     weapon_sc2ar(){
        szVModel = "models/svencontra2/v_sc2ar.mdl";
-	    szPModel = "models/svencontra2/wp_sc2ar.mdl";
-	    szWModel = "models/svencontra2/wp_sc2ar.mdl";
+        szPModel = "models/svencontra2/wp_sc2ar.mdl";
+        szWModel = "models/svencontra2/wp_sc2ar.mdl";
        szShellModel = "models/saw_shell.mdl";
        iMaxAmmo = 100;
        iMaxAmmo2 = 6;
@@ -32,22 +32,22 @@
     }
     void Precache() override{
        g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_ar.wav" );
-	g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_gr.wav" );
+    g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_gr.wav" );
        g_SoundSystem.PrecacheSound( szGrenadeFireSound );
        g_Game.PrecacheGeneric( "sound/" + szGrenadeFireSound );
-	g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_ar.wav" );
-	g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_gr.wav" );
+    g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_ar.wav" );
+    g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_gr.wav" );
 
        g_Game.PrecacheModel("sprites/svencontra2/bullet_ar.spr");
-	g_Game.PrecacheModel("sprites/svencontra2/bullet_gr.spr");
+    g_Game.PrecacheModel("sprites/svencontra2/bullet_gr.spr");
        g_Game.PrecacheModel("sprites/svencontra2/hud_sc2ar.spr");
        g_Game.PrecacheModel(szGrenadeSpr);
        g_Game.PrecacheGeneric( szGrenadeSpr );
        g_Game.PrecacheGeneric( "sprites/svencontra2/bullet_ar.spr" );
-	g_Game.PrecacheGeneric( "sprites/svencontra2/bullet_gr.spr" );
-	g_Game.PrecacheGeneric( "sprites/svencontra2/hud_sc2ar.spr" );
+    g_Game.PrecacheGeneric( "sprites/svencontra2/bullet_gr.spr" );
+    g_Game.PrecacheGeneric( "sprites/svencontra2/hud_sc2ar.spr" );
 
-	g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2ar.txt" );
+    g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2ar.txt" );
 
        CBaseContraWeapon::Precache();
     }

@@ -35,14 +35,14 @@ class  weapon_sc2sg : CBaseContraWeapon{
      }
      void Precache() override{
         g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_sg.wav" );
-		g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_sg.wav" );
+        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_sg.wav" );
 
         g_Game.PrecacheModel("sprites/svencontra2/hud_sc2sg.spr");
         g_Game.PrecacheModel("sprites/svencontra2/bullet_sg.spr");
-		g_Game.PrecacheGeneric("sprites/svencontra2/hud_sc2sg.spr");	
-		g_Game.PrecacheGeneric("sprites/svencontra2/bullet_sg.spr");			
+        g_Game.PrecacheGeneric("sprites/svencontra2/hud_sc2sg.spr");    
+        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_sg.spr");            
 
-		g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2sg.txt" );
+        g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2sg.txt" );
 
         CBaseContraWeapon::Precache();
      }
@@ -65,26 +65,26 @@ class  weapon_sc2sg : CBaseContraWeapon{
         }
     }
     void PrimaryAttack() override{
-		if( m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0){
-			self.PlayEmptySound();
-			self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.15f;
-			return;
-		}
+        if( m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0){
+            self.PlayEmptySound();
+            self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.15f;
+            return;
+        }
         Fire(10);
         if( m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
-			m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
+            m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
         self.m_flNextPrimaryAttack = WeaponTimeBase() + flPrimeFireTime;
-	}
+    }
     void SecondaryAttack() override{
         if( m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0){
-			self.PlayEmptySound();
-			self.m_flNextSecondaryAttack = WeaponTimeBase() + 0.15f;
-			return;
-		}
+            self.PlayEmptySound();
+            self.m_flNextSecondaryAttack = WeaponTimeBase() + 0.15f;
+            return;
+        }
         Fire(8);
         if( m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
-			m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
+            m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
         self.m_flNextSecondaryAttack = WeaponTimeBase() + flSecconaryFireTime;
     }
 }
-		
+        

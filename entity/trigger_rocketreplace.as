@@ -10,19 +10,19 @@ class trigger_rocketreplace : ScriptBaseEntity{
         //1
         //机械-小型炮塔 (小黄球)
         g_Game.PrecacheModel("sprites/svencontra2/bullet_tta.spr");
-        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_tta.spr");	
+        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_tta.spr");    
         //2
         //机械-中型炮塔 (红球)
         g_Game.PrecacheModel("sprites/svencontra2/bullet_ttb.spr");
-        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_ttb.spr");	
+        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_ttb.spr");    
         //3
         //机械-重型炮塔A型 (灰蓝球)
         g_Game.PrecacheModel("sprites/svencontra2/bullet_ttc.spr");
-        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_ttc.spr");	
+        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_ttc.spr");    
         //4
         //机械-重型炮塔B型 (黄球)
         g_Game.PrecacheModel("sprites/svencontra2/bullet_ttd.spr");
-        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_ttd.spr");	
+        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_ttd.spr");    
         //5
         //异形-中型炮塔 (绿球)
         g_Game.PrecacheModel("sprites/svencontra2/bullet_tte.spr");

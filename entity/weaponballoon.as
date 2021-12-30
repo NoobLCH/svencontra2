@@ -58,8 +58,8 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
     }
     void Precache(){
         if( string( self.pev.model ).IsEmpty() )
-			g_Game.PrecacheModel( "models/common/lambda.mdl" );
-		else{
+            g_Game.PrecacheModel( "models/common/lambda.mdl" );
+        else{
             g_Game.PrecacheModel( self.pev.model );
             g_Game.PrecacheGeneric( self.pev.model );
         }
@@ -82,14 +82,14 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
         self.pev.velocity.z += flBaloonUpSpeed;
         self.pev.nextthink = g_Engine.time + iFlyReverseTime / 2;
 
-		self.pev.movetype = MOVETYPE_FLY;
-		self.pev.solid = SOLID_SLIDEBOX;
+        self.pev.movetype = MOVETYPE_FLY;
+        self.pev.solid = SOLID_SLIDEBOX;
         self.pev.effects &= ~EF_NODRAW;
         self.pev.takedamage = DAMAGE_YES;
 
         self.pev.health = self.pev.max_health = 1;
 
-		g_EntityFuncs.SetModel( self, string( self.pev.model ).IsEmpty() ? "models/common/lambda.mdl" : string(self.pev.model) );
+        g_EntityFuncs.SetModel( self, string( self.pev.model ).IsEmpty() ? "models/common/lambda.mdl" : string(self.pev.model) );
         g_EntityFuncs.SetSize( self.pev, Vector(-16,-16,-16), Vector(16, 16, 16));
 
         @pDestoryScheduler = g_Scheduler.SetTimeout(this, "Remove", flDestoryTime);
@@ -107,7 +107,7 @@ class CWeaponBalloon : ScriptBaseMonsterEntity{
             Init();
         else{
             self.pev.movetype = MOVETYPE_NONE;
-		    self.pev.solid = SOLID_NOT;
+            self.pev.solid = SOLID_NOT;
             self.pev.effects |= EF_NODRAW;
         }
         g_EntityFuncs.SetOrigin( self, self.pev.origin );

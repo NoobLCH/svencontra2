@@ -36,7 +36,7 @@ void PrecacheAllMonsterDeath(){
     g_Game.PrecacheGeneric( szMonsterDeathSprPath );
 
     g_SoundSystem.PrecacheSound( szMosnterDeathSoundPath );
-	g_Game.PrecacheGeneric( "sound/" + szMosnterDeathSoundPath );
+    g_Game.PrecacheGeneric( "sound/" + szMosnterDeathSoundPath );
     array<string>@ aryKey = dicMonsterDeathMap.getKeys();
     for(uint i = 0; i < aryKey.length();i++){
         array<string> aryVal = cast<array<string>>(dicMonsterDeathMap[aryKey[i]]);
@@ -44,7 +44,7 @@ void PrecacheAllMonsterDeath(){
         g_Game.PrecacheGeneric( aryVal[0] );
 
         g_SoundSystem.PrecacheSound( aryVal[1] );
-		g_Game.PrecacheGeneric( "sound/" + aryVal[1] );
+        g_Game.PrecacheGeneric( "sound/" + aryVal[1] );
     }
 }
 
@@ -85,7 +85,7 @@ void SearchAndDestoryMonster(){
 
 void InitMonsterList(){
     CBaseEntity@ pEntity = null;
-	while((@pEntity = g_EntityFuncs.FindEntityByClassname(pEntity, "monster_*")) !is null){
+    while((@pEntity = g_EntityFuncs.FindEntityByClassname(pEntity, "monster_*")) !is null){
         if(pEntity.IsMonster() && pEntity.IsAlive())
             aryMonsterList.insertLast(EHandle(@pEntity));
     }

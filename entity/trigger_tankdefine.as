@@ -24,7 +24,7 @@ class trigger_tankdefine : ScriptBaseEntity{
     }
     void DelayTrigger(){
         CBaseEntity@ pEntity = null;
-	    while((@pEntity = g_EntityFuncs.FindEntityByTargetname(pEntity, self.pev.target)) !is null){
+        while((@pEntity = g_EntityFuncs.FindEntityByTargetname(pEntity, self.pev.target)) !is null){
             if(@pEntity !is null)
                 pEntity.pev.weaponanim = iWeapon;
         }
