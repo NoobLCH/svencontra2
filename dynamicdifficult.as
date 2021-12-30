@@ -6,6 +6,7 @@ class CWeaponDMGBase {
     float FG = 55;
     float FGE = 100;
     float KN = 15;
+    float LG = 5;
     //默认值
     float ARD = AR;
     float SGD = SG;
@@ -13,12 +14,14 @@ class CWeaponDMGBase {
     float FGD = FG;
     float FGED = FGE;
     float KND = KN;
+    float LGD = LG;
     void Tweak(float factor){
         this.AR = factor * this.ARD;
         this.SG = factor * this.SGD;
         this.MG = factor * this.MGD;
         this.FG = factor * this.FGD;
         this.FGE = factor * this.FGED;
+        this.LG = factor * this.LGD;
         this.KN = factor * this.KND;
         g_EngineFuncs.CVarSetFloat(CVAR_KNNAME, this.KN);
     }

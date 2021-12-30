@@ -64,7 +64,7 @@ class  weapon_sc2lg : CBaseContraWeapon{
         szFireSound = "weapons/svencontra2/shot_ar.wav";
 
         flBulletSpeed = 1900;
-        flDamage = g_WeaponDMG.AR;
+        flDamage = g_WeaponDMG.LG;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(24,8,-5);
