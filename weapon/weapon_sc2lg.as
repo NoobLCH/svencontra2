@@ -85,29 +85,6 @@ class  weapon_sc2lg : CBaseContraWeapon{
     bool CanHolster(){
         return !bInFiring;
     }
-    void Holster(int skiplocal){
-        KillBeam(m_pPlayer.entindex() + 4096);
-        bInFiring = false;
-        CBaseContraWeapon::Holster(skiplocal);
-    }
-    void PrimaryAttack() override{
-        KillBeam(m_pPlayer.entindex() + 4096);
-        CBaseContraWeapon::PrimaryAttack();
-    }
-    void SecondaryAttack() override{
-        //Nothing but sad panda
-    }
-    CProjBullet@ CreateIvisibleProj(){
-        CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
-        g_EntityFuncs.SetOrigin( pBullet.self, m_pPlayer.GetGunPosition() );
-        @pBullet.pev.owner = @m_pPlayer.edict();
-        pBullet.pev.dmg = flDamage;
-        g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
-        //不能用no_draw与model=0, 否则将不会被绘制
-        pBullet.pev.rendermode = kRenderTransAdd;
-        pBullet.pev.renderamt = 0;
-        return @pBullet;
-    }
     void KillBeam(int entindex){
         NetworkMessage kbm(MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY, null);
             kbm.WriteByte(TE_KILLBEAM);
@@ -134,6 +111,29 @@ class  weapon_sc2lg : CBaseContraWeapon{
             m.WriteByte(255); // actually brightness
             m.WriteByte(0);
         m.End();
+    }
+    void Holster(int skiplocal){
+        KillBeam(m_pPlayer.entindex() + 4096);
+        bInFiring = false;
+        CBaseContraWeapon::Holster(skiplocal);
+    }
+    void PrimaryAttack() override{
+        KillBeam(m_pPlayer.entindex() + 4096);
+        CBaseContraWeapon::PrimaryAttack();
+    }
+    void SecondaryAttack() override{
+        //Nothing but sad panda
+    }
+    CProjBullet@ CreateIvisibleProj(){
+        CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
+        g_EntityFuncs.SetOrigin( pBullet.self, m_pPlayer.GetGunPosition() );
+        @pBullet.pev.owner = @m_pPlayer.edict();
+        pBullet.pev.dmg = flDamage;
+        g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
+        //不能用no_draw与model=0, 否则将不会被绘制
+        pBullet.pev.rendermode = kRenderTransAdd;
+        pBullet.pev.renderamt = 0;
+        return @pBullet;
     }
     void CreateProj(int pellet = 1) override{
         bInFiring = true;
