@@ -3,20 +3,21 @@ string BULLET_HITSOUND = "common/null.wav";
 
 funcdef void BulletTouchCallback( CProjBullet@, CBaseEntity@ );
 namespace ProjBulletTouch{
-    void DefaultTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
+    void DefaultDirectTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
         if(pOther.IsAlive()){
-            g_Utility.BloodDrips(pThis.self.pev.origin, g_Utility.RandomBloodVector(), pOther.BloodColor(), Math.RandomLong(1,3));
+            g_WeaponFuncs.DamageDecal(@pOther, pThis.iDamageType);
+            g_WeaponFuncs.SpawnBlood(pThis.self.pev.origin, pOther.BloodColor(), pThis.self.pev.dmg);
             pOther.TakeDamage( pThis.self.pev, pThis.self.pev.owner.vars, pThis.self.pev.dmg, pThis.iDamageType);
         }
+    }
+    void DefaultTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
+        ProjBulletTouch::DefaultDirectTouch(@pThis, @pOther);
         g_SoundSystem.EmitSound( pThis.self.edict(), CHAN_AUTO, pThis.szHitSound, 1.0f, ATTN_NONE );
         g_EntityFuncs.Remove(pThis.self);
     }
 
     void ExplodeTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
-        if(pOther.IsAlive()){
-            g_Utility.BloodDrips(pThis.self.pev.origin, g_Utility.RandomBloodVector(), pOther.BloodColor(), Math.RandomLong(5,10));
-            pOther.TakeDamage( pThis.self.pev, pThis.self.pev.owner.vars, pThis.self.pev.dmg, pThis.iDamageType);
-        }
+        ProjBulletTouch::DefaultDirectTouch(@pThis, @pOther);
         g_WeaponFuncs.RadiusDamage(pThis.self.pev.origin, pThis.self.pev, pThis.self.pev.owner.vars, pThis.flExpDmg, pThis.iExpRadius, -1, pThis.iDamageType);
         NetworkMessage m(MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY, null);
             m.WriteByte(TE_EXPLOSION);

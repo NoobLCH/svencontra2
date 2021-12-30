@@ -16,6 +16,7 @@
 #include "weapon/weapon_sc2fg"
 #include "weapon/weapon_sc2mg"
 #include "weapon/weapon_sc2sg"
+#include "weapon/weapon_sc2lg"
 
 #include "point_checkpoint"
 
@@ -49,6 +50,8 @@ void MapInit(){
     g_ItemRegistry.RegisterWeapon( "weapon_sc2mg", "svencontra2", "556");
     g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2sg", "weapon_sc2sg" );
     g_ItemRegistry.RegisterWeapon( "weapon_sc2sg", "svencontra2", "buckshot");
+    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2lg", "weapon_sc2lg" );
+    g_ItemRegistry.RegisterWeapon( "weapon_sc2lg", "svencontra2", "uranium");
 
     g_SurvivalMode.EnableMapSupport();
 }
