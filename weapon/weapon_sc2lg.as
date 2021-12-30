@@ -94,6 +94,9 @@ class  weapon_sc2lg : CBaseContraWeapon{
         KillBeam(m_pPlayer.entindex() + 4096);
         CBaseContraWeapon::PrimaryAttack();
     }
+    void SecondaryAttack() override{
+        //Nothing but sad panda
+    }
     CProjBullet@ CreateIvisibleProj(){
         CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
         g_EntityFuncs.SetOrigin( pBullet.self, m_pPlayer.GetGunPosition() );
