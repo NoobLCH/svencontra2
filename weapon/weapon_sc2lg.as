@@ -28,31 +28,31 @@ namespace ProjBulletTouch{
 
 class  weapon_sc2lg : CBaseContraWeapon{
     //激光宽度
-    private uint8 uiBeamWidth = 15;
+    private uint8 uiBeamWidth = 40;
     //激光SPR
-    private string szBeamSpr = "sprites/laserbeam.spr";
+    private string szBeamSpr = "sprites/svencontra2/lgbeam.spr";
     //激光伤害间隔
     private float flShotFireInterv = 0.01;
     //激光伤害总数
-    private int iShotMaxFire = 4;
+    private int iShotMaxFire = 10;
 
     private int iShotFire = iShotMaxFire;
     private bool bInFiring = false;
     private EHandle eFirst;
     private Vector vecOldVel;
     weapon_sc2lg(){
-        szVModel = "models/svencontra2/v_sc2ar.mdl";
-        szPModel = "models/svencontra2/wp_sc2ar.mdl";
-        szWModel = "models/svencontra2/wp_sc2ar.mdl";
+        szVModel = "models/svencontra2/v_sc2lg.mdl";
+        szPModel = "models/svencontra2/wp_sc2lg.mdl";
+        szWModel = "models/svencontra2/wp_sc2lg.mdl";
         szShellModel = "models/saw_shell.mdl";
-        iMaxAmmo = 100;
+        iMaxAmmo = 40;
         iMaxAmmo2 = 6;
-        iDefaultAmmo = 100;
-        iSlot = 2;
-        iPosition = 24;
+        iDefaultAmmo = 40;
+        iSlot = 3;
+        iPosition = 20;
 
         flDeployTime = 0.8f;
-        flPrimeFireTime = 0.21f;
+        flPrimeFireTime = 1.0f;
 
         szWeaponAnimeExt = "m16";
 
@@ -61,17 +61,17 @@ class  weapon_sc2lg : CBaseContraWeapon{
         aryFireAnime = {5, 6, 7};
         aryIdleAnime = {0, 1};
 
-        szFireSound = "weapons/svencontra2/shot_ar.wav";
+        szFireSound = "weapons/svencontra2/shot_lg.wav";
 
-        flBulletSpeed = 1900;
+        flBulletSpeed = 4000;
         flDamage = g_WeaponDMG.LG;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(24,8,-5);
     }
     void Precache() override{
-        g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_ar.wav" );
-        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_ar.wav" );
+        g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_lg.wav" );
+        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_lg.wav" );
 
         g_Game.PrecacheModel(szBeamSpr);
         g_Game.PrecacheGeneric( szBeamSpr );

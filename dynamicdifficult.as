@@ -6,7 +6,7 @@ class CWeaponDMGBase {
     float FG = 55;
     float FGE = 100;
     float KN = 15;
-    float LG = 5;
+    float LG = 20;
     //默认值
     float ARD = AR;
     float SGD = SG;

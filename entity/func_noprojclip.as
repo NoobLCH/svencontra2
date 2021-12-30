@@ -59,13 +59,13 @@ class CNoProjClip : ScriptBaseEntity{
     void Use(CBaseEntity@ pActivator, CBaseEntity@ pCaller, USE_TYPE useType, float flValue = 0.0f){
         if (self.pev.solid == SOLID_NOT){
             self.pev.solid = SOLID_TRIGGER;
-            g_Engine.force_retouch+=1;
+            g_Engine.force_retouch++;
         }
         else
             self.pev.solid = SOLID_NOT;
         g_EntityFuncs.SetOrigin( self, self.pev.origin );
     }
-    int    ObjectCaps() { 
+    int ObjectCaps() { 
         return BaseClass.ObjectCaps() & ~FCAP_ACROSS_TRANSITION; 
     }
 }

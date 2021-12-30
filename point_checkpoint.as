@@ -86,12 +86,12 @@ class point_checkpoint : ScriptBaseAnimating
         
         g_Game.PrecacheModel( "sprites/exit1.spr" );
         
-        g_SoundSystem.PrecacheSound( "../media/valve.mp3" );
-        g_SoundSystem.PrecacheSound( "debris/beamstart7.wav" );
-        g_SoundSystem.PrecacheSound( "ambience/port_suckout1.wav" );
+        g_SoundSystem.PrecacheSound( "../sound/svencontra2/1up.wav" );
+        g_SoundSystem.PrecacheSound( "debris/beamstart8.wav" );
+        g_SoundSystem.PrecacheSound( "common/null.wav" );
         
         if( string( self.pev.message ).IsEmpty() )
-            self.pev.message = "debris/beamstart4.wav";
+            self.pev.message = "items/gunpickup2.wav";
             
         g_SoundSystem.PrecacheSound( self.pev.message );
     }
@@ -203,7 +203,7 @@ class point_checkpoint : ScriptBaseAnimating
         // Set activated
         self.pev.frags = 1.0f;
         
-        g_SoundSystem.EmitSound( self.edict(), CHAN_STATIC, "../media/valve.mp3", 1.0f, ATTN_NONE );
+        g_SoundSystem.EmitSound( self.edict(), CHAN_STATIC, "../sound/svencontra2/1up.wav", 1.0f, ATTN_NONE );
 
         self.pev.rendermode        = kRenderTransTexture;
         self.pev.renderamt        = 255;
@@ -279,7 +279,7 @@ class point_checkpoint : ScriptBaseAnimating
         m_pSprite.pev.rendermode = kRenderTransAdd;
         m_pSprite.pev.renderamt = 128;
     
-        g_SoundSystem.EmitSound( self.edict(), CHAN_STATIC, "debris/beamstart7.wav", 1.0f, ATTN_NORM );
+        g_SoundSystem.EmitSound( self.edict(), CHAN_STATIC, "debris/beamstart8.wav", 1.0f, ATTN_NORM );
         
         SetThink( ThinkFunction( this.RespawnThink ) );
         self.pev.nextthink = g_Engine.time + 0.1f;
@@ -333,7 +333,7 @@ class point_checkpoint : ScriptBaseAnimating
     
     void StartKillSpriteThink()
     {
-        g_SoundSystem.EmitSound( self.edict(), CHAN_STATIC, "ambience/port_suckout1.wav", 1.0f, ATTN_NORM );
+        g_SoundSystem.EmitSound( self.edict(), CHAN_STATIC, "common/null.wav", 1.0f, ATTN_NORM );
         
         SetThink( ThinkFunction( this.KillSpriteThink ) );
         self.pev.nextthink = g_Engine.time + 3.0f;
