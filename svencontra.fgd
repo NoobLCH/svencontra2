@@ -230,3 +230,4 @@
 @PointClass base(Weapon, Targetx, ExclusiveHold) studio("models/svencontra2/wp_sc2sg.mdl") = weapon_sc2sg : "Shot Gun" []
 @PointClass base(Weapon, Targetx, ExclusiveHold) studio("models/svencontra2/wp_sc2mg.mdl") = weapon_sc2mg : "Mechine Gun" []
 @PointClass base(Weapon, Targetx, ExclusiveHold) studio("models/svencontra2/wp_sc2fg.mdl") = weapon_sc2fg : "Fire Gun" []
+@PointClass base(Weapon, Targetx, ExclusiveHold) studio("models/svencontra2/wp_sc2lg.mdl") = weapon_sc2lg : "Laser Gun" []
