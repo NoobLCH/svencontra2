@@ -19,9 +19,9 @@
 
         szWeaponAnimeExt = "m16";
 
-        iDeployAnime = 2;
-        iReloadAnime = 1;
-        aryFireAnime = {3, 4, 5};
+        iDeployAnime = 5;
+        iReloadAnime = 3;
+        aryFireAnime = {1, 2};
         aryIdleAnime = {0};
 
         szFireSound = "weapons/svencontra2/shot_fg.wav";

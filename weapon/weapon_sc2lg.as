@@ -56,9 +56,9 @@ class  weapon_sc2lg : CBaseContraWeapon{
 
         szWeaponAnimeExt = "m16";
 
-        iDeployAnime = 4;
-        iReloadAnime = 3;
-        aryFireAnime = {5, 6, 7};
+        iDeployAnime = 8;
+        iReloadAnime = 0;
+        aryFireAnime = {5, 6};
         aryIdleAnime = {0, 1};
 
         szFireSound = "weapons/svencontra2/shot_lg.wav";
