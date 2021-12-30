@@ -25,6 +25,14 @@ class CWeaponDMGBase {
         this.KN = factor * this.KND;
         g_EngineFuncs.CVarSetFloat(CVAR_KNNAME, this.KN);
     }
+    array<float> aryTweakFactors = {
+        1.0000000f,1.0000000f,1.0000000f,0.8143534f,0.7705802f,0.7348150f,
+        0.7045759f,0.6783816f,0.6552766f,0.6346085f,0.6159119f,0.5988432f,
+        0.5831416f,0.5686041f,0.5550701f,0.5424098f,0.5305173f,0.5193048f,
+        0.5086987f,0.4986367f,0.4890657f,0.4799401f,0.4712202f,0.4628714f,
+        0.4548636f,0.4471698f,0.4397664f,0.4326323f,0.4257486f,0.4190983f,
+        0.4126661f,0.4064380f
+    };
 }
 CWeaponDMGBase g_WeaponDMG;
 
@@ -92,6 +100,7 @@ void PlayerDMGTweak(){
     *         [,31]    [,32]
     * log(x) 0.4126661 0.406438
     */
-    float flTweakFactor = iNowPlayerNum <= 3 ? 1.0f : (-0.1961658f * log(iNowPlayerNum) + 1.086297f);
-    g_WeaponDMG.Tweak(flTweakFactor);
+    //float flTweakFactor = iNowPlayerNum <= 3 ? 1.0f : (-0.1961658f * log(iNowPlayerNum) + 1.086297f);
+    //g_WeaponDMG.Tweak(flTweakFactor);
+    g_WeaponDMG.Tweak(g_WeaponDMG.aryTweakFactors[iNowPlayerNum-1]);
 }
