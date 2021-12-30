@@ -9,8 +9,7 @@ namespace ProjBulletTouch{
             g_WeaponFuncs.DecalGunshot(tr, BULLET_PLAYER_EAGLE);
             g_Utility.Sparks(vecStart);
         }
-        g_SoundSystem.EmitSound( pThis.self.edict(), CHAN_AUTO, pThis.szHitSound, 1.0f, ATTN_NONE );
-        g_EntityFuncs.Remove(pThis.self);
+        ProjBulletTouch::DefaultPostTouch(@pThis, @pOther);
     }
     void LaserGunFirstShotTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
         pThis.pev.velocity = g_vecZero;
@@ -23,14 +22,18 @@ namespace ProjBulletTouch{
         kbm.End();
         CBaseEntity@ pFirst = g_EntityFuncs.Instance(pThis.pev.euser2);
         g_EntityFuncs.Remove(pFirst);
-        g_EntityFuncs.Remove(pThis.self);
+        ProjBulletTouch::DefaultPostTouch(@pThis, @pOther);
     }
 }
 
 class  weapon_sc2lg : CBaseContraWeapon{
+    //激光宽度
     private uint8 uiBeamWidth = 15;
+    //激光SPR
     private string szBeamSpr = "sprites/laserbeam.spr";
+    //激光伤害间隔
     private float flShotFireInterv = 0.01;
+    //激光伤害总数
     private int iShotMaxFire = 4;
 
     private int iShotFire = iShotMaxFire;

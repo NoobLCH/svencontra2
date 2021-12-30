@@ -10,12 +10,14 @@ namespace ProjBulletTouch{
             pOther.TakeDamage( pThis.self.pev, pThis.self.pev.owner.vars, pThis.self.pev.dmg, pThis.iDamageType);
         }
     }
-    void DefaultTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
-        ProjBulletTouch::DefaultDirectTouch(@pThis, @pOther);
+    void DefaultPostTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
         g_SoundSystem.EmitSound( pThis.self.edict(), CHAN_AUTO, pThis.szHitSound, 1.0f, ATTN_NONE );
         g_EntityFuncs.Remove(pThis.self);
     }
-
+    void DefaultTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
+        ProjBulletTouch::DefaultDirectTouch(@pThis, @pOther);
+        ProjBulletTouch::DefaultPostTouch(@pThis, @pOther);
+    }
     void ExplodeTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
         ProjBulletTouch::DefaultDirectTouch(@pThis, @pOther);
         g_WeaponFuncs.RadiusDamage(pThis.self.pev.origin, pThis.self.pev, pThis.self.pev.owner.vars, pThis.flExpDmg, pThis.iExpRadius, -1, pThis.iDamageType);
@@ -29,8 +31,7 @@ namespace ProjBulletTouch{
             m.WriteByte(15);
             m.WriteByte(0);
         m.End();
-        g_SoundSystem.EmitSound( pThis.self.edict(), CHAN_AUTO, pThis.szExpSound, 1.0f, ATTN_NONE );
-        g_EntityFuncs.Remove(pThis.self);
+        ProjBulletTouch::DefaultPostTouch(@pThis, @pOther);
     }
 }
 class CProjBullet : ScriptBaseAnimating{
