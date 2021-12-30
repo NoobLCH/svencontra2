@@ -53,7 +53,6 @@ class  weapon_sc2lg : CBaseContraWeapon{
 
         flDeployTime = 0.8f;
         flPrimeFireTime = 0.21f;
-        flSecconaryFireTime = 1.5f;
 
         szWeaponAnimeExt = "m16";
 
@@ -120,9 +119,10 @@ class  weapon_sc2lg : CBaseContraWeapon{
     void PrimaryAttack() override{
         KillBeam(m_pPlayer.entindex() + 4096);
         CBaseContraWeapon::PrimaryAttack();
+        self.m_flNextSecondaryAttack = WeaponTimeBase() + flPrimeFireTime;
     }
     void SecondaryAttack() override{
-        //Nothing but sad panda
+        PrimaryAttack();
     }
     CProjBullet@ CreateIvisibleProj(){
         CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
