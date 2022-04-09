@@ -5,9 +5,8 @@
 
 #include "entity/info_weaponflag"
 #include "entity/func_noprojclip"
-#include "entity/trigger_rocketreplace"
-#include "entity/trigger_tankdefine"
 #include "entity/weaponballoon"
+#include "entity/func_tank_custom"
 
 #include "proj/proj_bullet"
 
@@ -30,10 +29,8 @@ void MapInit(){
     g_CustomEntityFuncs.RegisterCustomEntity( "CWeaponFlag", WEAPONFLAG_REGISTERNAME );
     g_CustomEntityFuncs.RegisterCustomEntity( "CProjBullet", BULLET_REGISTERNAME );
     g_CustomEntityFuncs.RegisterCustomEntity( "CWeaponBalloon", "weaponballoon" );
-    g_CustomEntityFuncs.RegisterCustomEntity( "trigger_tankdefine", "trigger_tankdefine" );
-    g_CustomEntityFuncs.RegisterCustomEntity( "trigger_rocketreplace", "trigger_rocketreplace" );
     g_Game.PrecacheOther(BULLET_REGISTERNAME);
-    g_Game.PrecacheOther("trigger_rocketreplace");
+    g_CustomEntityFuncs.RegisterCustomEntity( "CustomTank::CFuncTankProj", "func_tankcontra" );
     RegisterPointCheckPointEntity();
 
     PrecacheAllMonsterDeath();
@@ -58,5 +55,4 @@ void MapInit(){
 
 void MapStart(){
     InitMonsterList();
-    g_EntityFuncs.Create("trigger_rocketreplace", g_vecZero, g_vecZero, false);
 }
