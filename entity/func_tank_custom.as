@@ -1,6 +1,5 @@
 namespace CustomTank
 {
-    void printf(string sz) {g_Log.PrintF(sz + "\n");}
 enum TANKSF
 {
     SF_TANK_ACTIVE = 0x0001,
