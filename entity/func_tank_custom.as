@@ -856,6 +856,7 @@ class CFuncTankProj : CFuncTank
                 {
                     CProjBullet@ pProj = ShootABullet(self, barrelEnd, vecVelocity);
                     pProj.pev.scale = flSprScale;
+                    g_EntityFuncs.SetModel(pProj.self, szSprPath);
                 }
                 CFuncTank::Fire( barrelEnd, forward, pev );
             }
