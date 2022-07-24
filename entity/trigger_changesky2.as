@@ -12,13 +12,13 @@ enum CHANGESKY_SPAWNFLAG{
 }
 class CChangeSky : ScriptBaseEntity{
     private string szSkyName = "";
-    private Vector vecColor;
+    private Vector vecColor = Vector(255, 255, 255);
     bool KeyValue(const string& in szKeyName, const string& in szValue){
         if(szKeyName == "skyname"){
             szSkyName = szValue;
             return true;
         }
-        else if(szKeyName == "skyname"){
+        else if(szKeyName == "color"){
             g_Utility.StringToVector(vecColor, szValue);
             return true;
         }
@@ -43,7 +43,7 @@ class CChangeSky : ScriptBaseEntity{
     }
     void Spawn(){
         BaseClass.Spawn();
-        if(!szSkyName.IsEmpty()){
+        if(szSkyName.IsEmpty()){
             g_EntityFuncs.Remove(self);
             return;
         }
