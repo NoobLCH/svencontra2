@@ -11,7 +11,7 @@ class  weapon_sc2mg : CBaseContraWeapon{
         szFloatFlagModel = "sprites/svencontra2/icon_sc2mg.spr";
 
         iMaxAmmo = 600;
-        iDefaultAmmo = 200;
+        iDefaultAmmo = 300;
         iSlot = 2;
         iPosition = 20;
 

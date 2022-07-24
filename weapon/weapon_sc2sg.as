@@ -8,8 +8,8 @@ class  weapon_sc2sg : CBaseContraWeapon{
         szShellModel = "models/shotgunshell.mdl";
         szFloatFlagModel = "sprites/svencontra2/icon_sc2sg.spr";
         
-        iMaxAmmo = 180;
-        iDefaultAmmo = 60;
+        iMaxAmmo = 200;
+        iDefaultAmmo = 80;
         iSlot = 2;
         iPosition = 21;
 

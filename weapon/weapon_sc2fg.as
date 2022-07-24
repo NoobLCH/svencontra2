@@ -7,11 +7,11 @@
 
         szShellModel = "";
 
-        iMaxAmmo = 80;
+        iMaxAmmo = 100;
         iMaxAmmo2 = -1;
-        iDefaultAmmo = 20;
-        iSlot = 2;
-        iPosition = 22;
+        iDefaultAmmo = 40;
+        iSlot = 3;
+        iPosition = 20;
 
         flDeployTime = 0.8f;
         flPrimeFireTime = 0.6f;

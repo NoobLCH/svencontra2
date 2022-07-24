@@ -45,11 +45,13 @@ class  weapon_sc2lg : CBaseContraWeapon{
         szPModel = "models/svencontra2/wp_sc2lg.mdl";
         szWModel = "models/svencontra2/wp_sc2lg.mdl";
         szShellModel = "models/saw_shell.mdl";
-        iMaxAmmo = 40;
+        szFloatFlagModel = "sprites/svencontra2/icon_sc2lg.spr";
+
+        iMaxAmmo = 100;
         iMaxAmmo2 = 6;
-        iDefaultAmmo = 40;
+        iDefaultAmmo = 50;
         iSlot = 3;
-        iPosition = 20;
+        iPosition = 21;
 
         flDeployTime = 0.8f;
         flPrimeFireTime = 1.0f;

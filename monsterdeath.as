@@ -1,8 +1,8 @@
 array<EHandle> aryMonsterList = {};
 //spr路径
-const string szMonsterDeathSprPath = "sprites/bloodspray.spr";
+const string szMonsterDeathSprPath = "sprites/deadspray_a.spr";
 //默认音效路径
-const string szMosnterDeathSoundPath = "common/bodysplat.wav";
+const string szMosnterDeathSoundPath = "sound/npcdead_a.wav";
 //播放spr并删除延迟
 const float flMonsterDeathSprRemoveDelay = 0.5f;
 //spr速率
@@ -26,9 +26,12 @@ const dictionary dicMonsterDeathMap = {
     {"monster_human_grunt", array<string> = {"sprites/svencontra2/deadspray_a.spr", "svencontra2/npcdead_a.wav"}},
     {"monster_human_grunt_ally", array<string> = {"sprites/svencontra2/deadspray_a.spr", "svencontra2/npcdead_b.wav"}},
     {"monster_grunt_repel", array<string> = {"sprites/svencontra2/deadspray_a.spr", "svencontra2/npcdead_a.wav"}},
+    {"monster_human_torch_ally", array<string> = {"sprites/svencontra2/deadspray_a.spr", "svencontra2/npcdead_b.wav"}},
     {"monster_hwgrunt", array<string> = {"sprites/svencontra2/deadspray_a.spr", "svencontra2/npcdead_b.wav"}},
     {"monster_headcrab", array<string> = {"sprites/svencontra2/deadspray_c.spr", "svencontra2/npcdead_d.wav"}},
-    {"monster_zombie_soldier", array<string> = {"sprites/svencontra2/deadspray_b.spr", "svencontra2/npcdead_c.wav"}}
+    {"monster_zombie_soldier", array<string> = {"sprites/svencontra2/deadspray_b.spr", "svencontra2/npcdead_c.wav"}},
+    {"monster_handgrenade", array<string> = {"sprites/svencontra2/mark.spr", "svencontra2/mark.wav"}},
+    {"monster_bullchicken", array<string> = {"sprites/svencontra2/deadspray_b.spr", "svencontra2/npcdead_e.wav"}}
 };
 
 void PrecacheAllMonsterDeath(){

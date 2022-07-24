@@ -8,6 +8,7 @@
         szPModel = "models/svencontra2/wp_sc2ar.mdl";
         szWModel = "models/svencontra2/wp_sc2ar.mdl";
         szShellModel = "models/saw_shell.mdl";
+        szFloatFlagModel = "sprites/svencontra2/icon_sc2ar.spr";
         iMaxAmmo = 100;
         iMaxAmmo2 = 6;
         iDefaultAmmo = 100;
