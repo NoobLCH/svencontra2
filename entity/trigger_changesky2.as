@@ -65,10 +65,10 @@ class CChangeSky : ScriptBaseEntity{
                 SendMessage(MSG_BROADCAST, null);
         }
         if(self.pev.spawnflags & SF_UPDATESERVER != 0){
-            g_EngineFuncs.ServerCommand("sv_skyname " + szSkyName);
-            g_EngineFuncs.ServerCommand("sv_skycolor_r " + vecColor.x);
-            g_EngineFuncs.ServerCommand("sv_skycolor_g " + vecColor.y);
-            g_EngineFuncs.ServerCommand("sv_skycolor_b " + vecColor.z);
+            g_EngineFuncs.CVarSetString("sv_skyname", szSkyName);
+            g_EngineFuncs.CVarSetFloat("sv_skycolor_r", vecColor.x);
+            g_EngineFuncs.CVarSetFloat("sv_skycolor_g", vecColor.y);
+            g_EngineFuncs.CVarSetFloat("sv_skycolor_b", vecColor.z);
         }
     }
 }
