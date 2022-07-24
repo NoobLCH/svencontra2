@@ -7,6 +7,7 @@
 #include "entity/func_noprojclip"
 #include "entity/weaponballoon"
 #include "entity/func_tank_custom"
+#include "entity/trigger_changesky2"
 
 #include "proj/proj_bullet"
 
@@ -25,6 +26,7 @@ void PluginInit(){
 }
 
 void MapInit(){
+    g_CustomEntityFuncs.RegisterCustomEntity( "CChangeSky", "trigger_changesky2" );
     g_CustomEntityFuncs.RegisterCustomEntity( "CNoProjClip", "func_noprojclip" );
     g_CustomEntityFuncs.RegisterCustomEntity( "CWeaponFlag", WEAPONFLAG_REGISTERNAME );
     g_CustomEntityFuncs.RegisterCustomEntity( "CProjBullet", BULLET_REGISTERNAME );

@@ -349,6 +349,19 @@
     ]
     speed(integer) : "Speed of push" : 40
 ]
+
+@PointClass base(Targetname) color(160 192 255) = trigger_changesky2 : "Trigger Change Sky"
+[
+	skyname(string) : "Sky Name"
+	color(color255) : "Color"
+	spawnflags(flags) =
+	[
+		1 : "All players" : 0
+		2 : "No clients" : 0
+		4 : "Update server" : 0
+	]
+]
+
 @PointClass base(Weapon, Targetx, ExclusiveHold) studio("models/svencontra2/wp_sc2ar.mdl") = weapon_sc2ar : "Assault Rifle" []
 @PointClass base(Weapon, Targetx, ExclusiveHold) studio("models/svencontra2/wp_sc2sg.mdl") = weapon_sc2sg : "Shot Gun" []
 @PointClass base(Weapon, Targetx, ExclusiveHold) studio("models/svencontra2/wp_sc2mg.mdl") = weapon_sc2mg : "Mechine Gun" []
