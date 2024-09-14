@@ -323,6 +323,16 @@
 	sprPath(string) : "Proj spr path"
     sprSpeed(string) : "Proj speed" : "400"
     sprScale(string) : "Proj scale" : "1.0"
+    guntype(choices) : "Gun Type" : 0 =
+    [
+        0: "Proj Bullet"
+        1: "Proj Laser"
+    ]
+    pellet(integer) : "Bullets per shot" : 1
+    laserpath(string) : "Laser spr path"
+    lasercolor(color255) : "Laser Color (R G B)" : "255 0 0"
+    laserwidth(integer) : "Laser Width" : 2
+    laserlife(integer) : "Laser Life" : 1
 ]
 @PointClass base(Targetname, Target) size(-16 -16 -16, 16 16 16) color(255 50 50) = weaponballoon : "Weapon Balloon"
 [

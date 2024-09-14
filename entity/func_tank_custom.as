@@ -824,8 +824,15 @@ class CFuncTankRocket : CFuncTank
 class CFuncTankProj : CFuncTank
 {
     string szSprPath;
+    string szLaserPath = "sprites/smoke.spr";
     float flSprSpeed = 400;
     float flSprScale;
+    //GunType: 0:ProjBullet|1:ProjLaser
+    int iGunType = 0;
+    int iPellet = 1;
+    Vector vecLaserColor = Vector(255, 0, 0);
+    int iLaserWidth = 2;
+    int iLaserLife = 1;
     bool KeyValue( const string& in szKey, const string& in szValue )
     {
         if ( szKey == "sprpath")
@@ -834,6 +841,18 @@ class CFuncTankProj : CFuncTank
             flSprSpeed = atof(szValue);
         else if ( szKey == "sprscale")
             flSprScale = atof(szValue);
+        else if ( szKey == "guntype" )
+            iGunType = atoi(szValue);
+        else if (szKey == "pellet")
+            iPellet = atoi(szValue);
+        else if (szKey == "laserpath" && !szValue.IsEmpty())
+            szLaserPath = szValue;
+        else if (szKey == "laserwidth")
+            iLaserWidth = atoi(szValue);
+        else if (szKey == "laserlife")
+            iLaserLife = atoi(szValue);
+        else if(szKey == "lasercolor")
+            g_Utility.StringToVector(vecLaserColor, szValue);
         else
             return CFuncTank::KeyValue( szKey, szValue );
         return true;
@@ -842,6 +861,8 @@ class CFuncTankProj : CFuncTank
     {
         g_Game.PrecacheModel( szSprPath );
         g_Game.PrecacheGeneric( szSprPath );
+        g_Game.PrecacheModel( szLaserPath );
+        g_Game.PrecacheGeneric( szLaserPath );
         CFuncTank::Precache();
     }
     void Fire( const Vector barrelEnd, const Vector forward, entvars_t@ pevAttacker )
@@ -851,18 +872,52 @@ class CFuncTankProj : CFuncTank
             int bulletCount = int((g_Engine.time - m_fireLast) * m_fireRate);
             if ( bulletCount > 0 )
             {
-                Vector vecVelocity = forward * flSprSpeed;
-                for (int i = 0; i < bulletCount; i++ )
+                for (int i = 0; i < iPellet; i++ )
                 {
-                    CProjBullet@ pProj = ShootABullet(self, barrelEnd, vecVelocity);
+                    Vector vecVelocity = TankProjTrace(forward, gTankSpread[m_spread], flSprSpeed);
+                    CProjBullet@ pProj = ShootABullet(self, barrelEnd, vecVelocity, m_iBulletDamage, (iGunType == 1 ? DMG_ENERGYBEAM : DMG_BULLET));
                     pProj.pev.scale = flSprScale;
                     g_EntityFuncs.SetModel(pProj.self, szSprPath);
+                    if (iGunType == 1) {
+                        if (!szLaserPath.IsEmpty()) {
+                            NetworkMessage msg( MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY );
+                                msg.WriteByte( TE_BEAMFOLLOW );
+                                msg.WriteShort( pProj.self.entindex() ); // entity
+                                msg.WriteShort( g_EngineFuncs.ModelIndex(szLaserPath) ); // model
+                                msg.WriteByte( iLaserLife ); // life
+                                msg.WriteByte( iLaserWidth ); // width
+                                msg.WriteByte( int(vecLaserColor.x) ); // r, g, b
+                                msg.WriteByte( int(vecLaserColor.y) ); // r, g, b
+                                msg.WriteByte( int(vecLaserColor.z) ); // r, g, b
+                                msg.WriteByte( 255 ); // brightness
+                            msg.End(); // move PHS/PVS data sending into here (SEND_ALL, SEND_PVS, SEND_PHS)
+                        }
+                    }
                 }
                 CFuncTank::Fire( barrelEnd, forward, pev );
             }
         }
         else
             CFuncTank::Fire( barrelEnd, forward, pev );
+    }
+    Vector TankProjTrace( const Vector vecForward, const Vector vecSpread, const float flSpeed )
+    {
+        // get circular gaussian spread
+        float x, y, z;
+        do
+        {
+            x = Math.RandomFloat(-0.5,0.5) + Math.RandomFloat(-0.5,0.5);
+            y = Math.RandomFloat(-0.5,0.5) + Math.RandomFloat(-0.5,0.5);
+            z = x*x+y*y;
+        }
+        while (z > 1);
+      // push in engine
+        Math.MakeVectors(self.pev.angles);
+        Vector vecDir = vecForward +
+            x * vecSpread.x * g_Engine.v_right +
+            y * vecSpread.y * g_Engine.v_up;
+        Vector vecEnd = vecDir * flSpeed;
+        return vecEnd;
     }
 }
 //END

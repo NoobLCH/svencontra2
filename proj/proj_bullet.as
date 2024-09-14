@@ -116,7 +116,7 @@ class CProjBullet : ScriptBaseAnimating{
     }
 }
 
-CProjBullet@ ShootABullet(edict_t@ pOwner, Vector vecOrigin, Vector vecVelocity){
+CProjBullet@ ShootABullet(edict_t@ pOwner, Vector vecOrigin, Vector vecVelocity, int iDamage = 0, int iDamageType = DMG_BULLET, string szHitSnd = ""){
     CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
 
     g_EntityFuncs.SetOrigin( pBullet.self, vecOrigin );
@@ -127,12 +127,17 @@ CProjBullet@ ShootABullet(edict_t@ pOwner, Vector vecOrigin, Vector vecVelocity)
     
     pBullet.SetTouch( TouchFunction( pBullet.Touch ) );
 
+    pBullet.pev.dmg = iDamage;
+    pBullet.iDamageType = iDamageType;
+    if (!szHitSnd.IsEmpty())
+        pBullet.szHitSound = szHitSnd;
+
     g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
 
     return pBullet;
 }
 
-CProjBullet@ ShootABullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVelocity){
+CProjBullet@ ShootABullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVelocity, int iDamage = 0, int iDamageType = DMG_BULLET, string szHitSnd = ""){
     CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
 
     g_EntityFuncs.SetOrigin( pBullet.self, vecOrigin );
@@ -142,6 +147,11 @@ CProjBullet@ ShootABullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVeloc
     pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
     
     pBullet.SetTouch( TouchFunction( pBullet.Touch ) );
+
+    pBullet.pev.dmg = iDamage;
+    pBullet.iDamageType = iDamageType;
+    if (!szHitSnd.IsEmpty())
+        pBullet.szHitSound = szHitSnd;
 
     g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
 
