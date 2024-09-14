@@ -1,12 +1,12 @@
-class  weapon_sc2sg : CBaseContraWeapon{
+class  weapon_sho3 : CBaseContraWeapon{
     //霰弹圆形扩散度;
     private float flRoundSpear = 50.0f;
-     weapon_sc2sg(){
-        szVModel = "models/svencontra2/v_sc2sg.mdl";
-        szPModel = "models/svencontra2/wp_sc2sg.mdl";
-        szWModel = "models/svencontra2/wp_sc2sg.mdl";
+     weapon_sho3(){
+        szVModel = "models/solidgear/v_sho3.mdl";
+        szPModel = "models/solidgear/wp_sho3.mdl";
+        szWModel = "models/solidgear/wp_sho3.mdl";
         szShellModel = "models/shotgunshell.mdl";
-        szFloatFlagModel = "sprites/svencontra2/icon_sc2sg.spr";
+        szFloatFlagModel = "sprites/solidgear/icon_sho3.spr";
         
         iMaxAmmo = 200;
         iDefaultAmmo = 80;
@@ -24,9 +24,9 @@ class  weapon_sc2sg : CBaseContraWeapon{
         aryFireAnime = {1, 2};
         aryIdleAnime = {0, 8};
 
-        szFireSound = "weapons/svencontra2/shot_sg.wav";
+        szFireSound = "weapons/solidgear/sho3_shot.wav";
 
-        flBulletSpeed = 2000;
+        flBulletSpeed = 4000;
         flDamage = g_WeaponDMG.SG;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
@@ -34,15 +34,15 @@ class  weapon_sc2sg : CBaseContraWeapon{
         vecEjectOffset = Vector(24,8,-5);
      }
      void Precache() override{
-        g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_sg.wav" );
-        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_sg.wav" );
+        g_SoundSystem.PrecacheSound( "weapons/solidgear/sho3_shot.wav" );
+        g_Game.PrecacheGeneric( "sound/weapons/solidgear/sho3_shot.wav" );
 
-        g_Game.PrecacheModel("sprites/svencontra2/hud_sc2sg.spr");
-        g_Game.PrecacheModel("sprites/svencontra2/bullet_sg.spr");
-        g_Game.PrecacheGeneric("sprites/svencontra2/hud_sc2sg.spr");    
-        g_Game.PrecacheGeneric("sprites/svencontra2/bullet_sg.spr");            
+        g_Game.PrecacheModel("sprites/solidgear/hud_sho3.spr");
+        g_Game.PrecacheModel("sprites/solidgear/bullet_sho3.spr");
+        g_Game.PrecacheGeneric("sprites/solidgear/hud_sho3.spr");    
+        g_Game.PrecacheGeneric("sprites/solidgear/bullet_sho3.spr");            
 
-        g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2sg.txt" );
+        g_Game.PrecacheGeneric( "sprites/solidgear/weapon_sho3.txt" );
 
         CBaseContraWeapon::Precache();
      }
@@ -51,7 +51,7 @@ class  weapon_sc2sg : CBaseContraWeapon{
          CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
             g_EntityFuncs.SetOrigin( pBullet.self, m_pPlayer.GetGunPosition() );
             @pBullet.pev.owner = @m_pPlayer.edict();
-            pBullet.pev.model = "sprites/svencontra2/bullet_sg.spr";
+            pBullet.pev.model = "sprites/solidgear/bullet_sho3.spr";
             pBullet.pev.velocity = vecAiming * flBulletSpeed + r * g_Engine.v_right + u *  g_Engine.v_up;
             pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
             pBullet.pev.dmg = flDamage;

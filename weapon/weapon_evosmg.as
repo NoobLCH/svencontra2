@@ -1,19 +1,17 @@
- class  weapon_sc2ar : CBaseContraWeapon{
+ class  weapon_evosmg : CBaseContraWeapon{
      private bool bInRecharg = false;
      private float flRechargInterv = 0.02;
-     private string szGrenadeSpr = "sprites/svencontra2/bullet_gr.spr";
-     private string szGrenadeFireSound = "weapons/svencontra2/shot_gr.wav";
-     weapon_sc2ar(){
-        szVModel = "models/svencontra2/v_sc2ar.mdl";
-        szPModel = "models/svencontra2/wp_sc2ar.mdl";
-        szWModel = "models/svencontra2/wp_sc2ar.mdl";
-        szShellModel = "models/saw_shell.mdl";
-        szFloatFlagModel = "sprites/svencontra2/icon_sc2ar.spr";
-        iMaxAmmo = 100;
-        iMaxAmmo2 = 6;
-        iDefaultAmmo = 100;
+
+     weapon_evosmg(){
+        szVModel = "models/solidgear/v_evosmg.mdl";
+        szPModel = "models/solidgear/wp_evosmg.mdl";
+        szWModel = "models/solidgear/wp_evosmg.mdl";
+        szShellModel = "models/shell.mdl";
+        
+        iMaxAmmo = 600;
+        iDefaultAmmo = 600;
         iSlot = 1;
-        iPosition = 20;
+        iPosition = 21;
 
         flDeployTime = 0.8f;
         flPrimeFireTime = 0.11f;
@@ -26,32 +24,28 @@
         aryFireAnime = {5, 6, 7};
         aryIdleAnime = {0, 1};
 
-        szFireSound = "weapons/svencontra2/shot_ar.wav";
+        szFireSound = "weapons/solidgear/evosmg_shot.wav";
 
-        flBulletSpeed = 1900;
+        flBulletSpeed = 4000;
         flDamage = g_WeaponDMG.AR;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(24,8,-5);
      }
      void Precache() override{
-        g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_ar.wav" );
-        g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_gr.wav" );
-        g_SoundSystem.PrecacheSound( szGrenadeFireSound );
-        g_Game.PrecacheGeneric( "sound/" + szGrenadeFireSound );
-        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_ar.wav" );
-        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_gr.wav" );
+        g_SoundSystem.PrecacheSound( "weapons/solidgear/evosmg_shot.wav" );
+        /* g_SoundSystem.PrecacheSound( szGrenadeFireSound );
+        g_Game.PrecacheGeneric( "sound/" + szGrenadeFireSound ); */
+        g_Game.PrecacheGeneric( "sound/weapons/solidgear/evosmg_shot.wav" );
 
-        g_Game.PrecacheModel("sprites/svencontra2/bullet_ar.spr");
-        g_Game.PrecacheModel("sprites/svencontra2/bullet_gr.spr");
-        g_Game.PrecacheModel("sprites/svencontra2/hud_sc2ar.spr");
-        g_Game.PrecacheModel(szGrenadeSpr);
-        g_Game.PrecacheGeneric( szGrenadeSpr );
-        g_Game.PrecacheGeneric( "sprites/svencontra2/bullet_ar.spr" );
-        g_Game.PrecacheGeneric( "sprites/svencontra2/bullet_gr.spr" );
-        g_Game.PrecacheGeneric( "sprites/svencontra2/hud_sc2ar.spr" );
+        g_Game.PrecacheModel("sprites/solidgear/bullet_evosmg.spr");
+        g_Game.PrecacheModel("sprites/solidgear/hud_evosmg.spr");
+        /* g_Game.PrecacheModel(szGrenadeSpr);
+        g_Game.PrecacheGeneric( szGrenadeSpr ); */
+        g_Game.PrecacheGeneric( "sprites/solidgear/bullet_evosmg.spr" );
+        g_Game.PrecacheGeneric( "sprites/solidgear/hud_evosmg.spr" );
 
-        g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2ar.txt" );
+        g_Game.PrecacheGeneric( "sprites/solidgear/weapon_evosmg.txt" );
 
         CBaseContraWeapon::Precache();
      }
@@ -63,7 +57,7 @@
         CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
         g_EntityFuncs.SetOrigin( pBullet.self, m_pPlayer.GetGunPosition() );
         @pBullet.pev.owner = @m_pPlayer.edict();
-        pBullet.pev.model = "sprites/svencontra2/bullet_ar.spr";
+        pBullet.pev.model = "sprites/solidgear/bullet_evosmg.spr";
         pBullet.pev.velocity = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES ) * flBulletSpeed;
         pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
         pBullet.pev.dmg = flDamage;
@@ -98,7 +92,7 @@
         self.m_flNextPrimaryAttack = WeaponTimeBase() + flPrimeFireTime;
     }
     void SecondaryAttack() override{    
-        if(bInRecharg)
+        /* if(bInRecharg)
             return;
         if( m_pPlayer.m_rgAmmo( self.m_iSecondaryAmmoType ) <= 0){
             self.PlayEmptySound();
@@ -123,6 +117,6 @@
         pGrenade.pev.avelocity = g_vecZero;
 
         self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = WeaponTimeBase() + flSecconaryFireTime;
-        self.m_flTimeWeaponIdle = WeaponTimeBase() + 5;
+        self.m_flTimeWeaponIdle = WeaponTimeBase() + 5; */
     }
 }

@@ -26,11 +26,11 @@ namespace ProjBulletTouch{
     }
 }
 
-class  weapon_sc2lg : CBaseContraWeapon{
+class  weapon_gaussrifle : CBaseContraWeapon{
     //激光宽度
     private uint8 uiBeamWidth = 40;
     //激光SPR
-    private string szBeamSpr = "sprites/svencontra2/lgbeam.spr";
+    private string szBeamSpr = "sprites/solidgear/gaussbeam.spr";
     //激光伤害间隔
     private float flShotFireInterv = 0.01;
     //激光伤害总数
@@ -40,12 +40,12 @@ class  weapon_sc2lg : CBaseContraWeapon{
     private bool bInFiring = false;
     private EHandle eFirst;
     private Vector vecOldVel;
-    weapon_sc2lg(){
-        szVModel = "models/svencontra2/v_sc2lg.mdl";
-        szPModel = "models/svencontra2/wp_sc2lg.mdl";
-        szWModel = "models/svencontra2/wp_sc2lg.mdl";
+    weapon_gaussrifle(){
+        szVModel = "models/solidgear/v_gaussrifle.mdl";
+        szPModel = "models/solidgear/wp_gaussrifle.mdl";
+        szWModel = "models/solidgear/wp_gaussrifle.mdl";
         szShellModel = "models/saw_shell.mdl";
-        szFloatFlagModel = "sprites/svencontra2/icon_sc2lg.spr";
+        szFloatFlagModel = "sprites/solidgear/icon_gaussrifle.spr";
 
         iMaxAmmo = 100;
         iMaxAmmo2 = 6;
@@ -63,23 +63,23 @@ class  weapon_sc2lg : CBaseContraWeapon{
         aryFireAnime = {5, 6};
         aryIdleAnime = {0, 1};
 
-        szFireSound = "weapons/svencontra2/shot_lg.wav";
+        szFireSound = "weapons/solidgear/gaussrifle_shot.wav";
 
-        flBulletSpeed = 4000;
+        flBulletSpeed = 5000;
         flDamage = g_WeaponDMG.LG;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(24,8,-5);
     }
     void Precache() override{
-        g_SoundSystem.PrecacheSound( "weapons/svencontra2/shot_lg.wav" );
-        g_Game.PrecacheGeneric( "sound/weapons/svencontra2/shot_lg.wav" );
+        g_SoundSystem.PrecacheSound( "weapons/solidgear/gaussrifle_shot.wav" );
+        g_Game.PrecacheGeneric( "sound/weapons/solidgear/gaussrifle_shot.wav" );
 
         g_Game.PrecacheModel(szBeamSpr);
         g_Game.PrecacheGeneric( szBeamSpr );
-        g_Game.PrecacheModel("sprites/svencontra2/hud_sc2lg.spr");
-        g_Game.PrecacheGeneric( "sprites/svencontra2/hud_sc2lg.spr" );
-        g_Game.PrecacheGeneric( "sprites/svencontra2/weapon_sc2lg.txt" );
+        g_Game.PrecacheModel("sprites/solidgear/hud_gaussrifle.spr");
+        g_Game.PrecacheGeneric( "sprites/solidgear/hud_gaussrifle.spr" );
+        g_Game.PrecacheGeneric( "sprites/solidgear/weapon_gaussrifle.txt" );
 
         CBaseContraWeapon::Precache();
     }

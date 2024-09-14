@@ -12,17 +12,17 @@
 #include "proj/proj_bullet"
 
 #include "weapon/weaponbase"
-#include "weapon/weapon_sc2ar"
-#include "weapon/weapon_sc2fg"
-#include "weapon/weapon_sc2mg"
-#include "weapon/weapon_sc2sg"
-#include "weapon/weapon_sc2lg"
+#include "weapon/weapon_556ar"
+#include "weapon/weapon_m32gl"
+#include "weapon/weapon_evosmg"
+#include "weapon/weapon_sho3"
+#include "weapon/weapon_gaussrifle"
 
 #include "point_checkpoint"
 
 void PluginInit(){
-    g_Module.ScriptInfo.SetAuthor( "❤Dr.Abc Official❤" );
-    g_Module.ScriptInfo.SetContactInfo( "❤Love you❤" );
+    g_Module.ScriptInfo.SetAuthor( "Dr.Abc & NoobLCH" );
+    g_Module.ScriptInfo.SetContactInfo( "BDSC Server" );
 }
 
 void MapInit(){
@@ -32,7 +32,7 @@ void MapInit(){
     g_CustomEntityFuncs.RegisterCustomEntity( "CProjBullet", BULLET_REGISTERNAME );
     g_CustomEntityFuncs.RegisterCustomEntity( "CWeaponBalloon", "weaponballoon" );
     g_Game.PrecacheOther(BULLET_REGISTERNAME);
-    g_CustomEntityFuncs.RegisterCustomEntity( "CustomTank::CFuncTankProj", "func_tankcontra" );
+    g_CustomEntityFuncs.RegisterCustomEntity( "CustomTank::CFuncTankProj", "func_tanksg" );
     RegisterPointCheckPointEntity();
 
     PrecacheAllMonsterDeath();
@@ -41,16 +41,16 @@ void MapInit(){
     g_Hooks.RegisterHook( Hooks::Player::ClientPutInServer, @ClientPutInServer );
     g_Scheduler.SetInterval("SearchAndDestoryMonster", 0.01f, g_Scheduler.REPEAT_INFINITE_TIMES);
     
-    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2ar", "weapon_sc2ar" );
-    g_ItemRegistry.RegisterWeapon( "weapon_sc2ar", "svencontra2", "9mm", "ARgrenades" );
-    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2fg", "weapon_sc2fg" );
-    g_ItemRegistry.RegisterWeapon( "weapon_sc2fg", "svencontra2", "rockets");
-    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2mg", "weapon_sc2mg" );
-    g_ItemRegistry.RegisterWeapon( "weapon_sc2mg", "svencontra2", "556");
-    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2sg", "weapon_sc2sg" );
-    g_ItemRegistry.RegisterWeapon( "weapon_sc2sg", "svencontra2", "buckshot");
-    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sc2lg", "weapon_sc2lg" );
-    g_ItemRegistry.RegisterWeapon( "weapon_sc2lg", "svencontra2", "uranium");
+    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_556ar", "weapon_556ar" );
+    g_ItemRegistry.RegisterWeapon( "weapon_556ar", "solidgear", "556");
+    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_m32gl", "weapon_m32gl" );
+    g_ItemRegistry.RegisterWeapon( "weapon_m32gl", "solidgear", "ARgrenades");
+    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_evosmg", "weapon_evosmg" );
+    g_ItemRegistry.RegisterWeapon( "weapon_evosmg", "solidgear", "9mm");
+    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_sho3", "weapon_sho3" );
+    g_ItemRegistry.RegisterWeapon( "weapon_sho3", "solidgear", "buckshot");
+    g_CustomEntityFuncs.RegisterCustomEntity( "weapon_gaussrifle", "weapon_gaussrifle" );
+    g_ItemRegistry.RegisterWeapon( "weapon_gaussrifle", "solidgear", "uranium");
 
     g_SurvivalMode.EnableMapSupport();
 }

@@ -318,7 +318,7 @@
 ]
 
 //业务代码
-@SolidClass base(BaseTank, ZHLT) = func_tankcontra : "Contra Turret"
+@SolidClass base(BaseTank, ZHLT) = func_tanksg: "Contra Turret"
 [
 	sprPath(string) : "Proj spr path"
     sprSpeed(string) : "Proj speed" : "400"
