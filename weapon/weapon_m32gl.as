@@ -12,8 +12,8 @@
         iPosition = 20;
 
         flDeployTime = 0.8f;
-        flPrimeFireTime = 0.6f;
-        flSecconaryFireTime = 0.6f;
+        flPrimeFireTime = 0.7f;
+        flSecconaryFireTime = 0.5f;
 
         szWeaponAnimeExt = "m16";
 
@@ -24,7 +24,7 @@
 
         szFireSound = "weapons/solidgear/m32gl_shot.wav";
 
-        flBulletSpeed = 3500;
+        flBulletSpeed = 1200;
         flDamage = g_WeaponDMG.FG;
         vecPunchX = Vector2D(-4,5);
         vecPunchY = Vector2D(-1,1);
@@ -45,7 +45,7 @@
         CBaseContraWeapon::Precache();
      }
      void CreateProj(int pellet = 1) override{
-        CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
+        /* CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
         g_EntityFuncs.SetOrigin( pBullet.self, m_pPlayer.GetGunPosition() );
         @pBullet.pev.owner = @m_pPlayer.edict();
         pBullet.pev.dmg = flDamage;
@@ -54,6 +54,10 @@
         pBullet.pev.velocity = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES ) * flBulletSpeed;
         pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
         @pBullet.pTouchFunc = @ProjBulletTouch::ExplodeTouch;
-        g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
+        g_EntityFuncs.DispatchSpawn( pBullet.self.edict() ); */
+
+        //直接使用原版榴弹
+        CGrenade@ pGrenade = g_EntityFuncs.ShootContact( m_pPlayer.pev, m_pPlayer.GetGunPosition(), m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES ) * flBulletSpeed );
+        pGrenade.pev.dmg = flDamage;
     }
  }

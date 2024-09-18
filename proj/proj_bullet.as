@@ -33,6 +33,23 @@ namespace ProjBulletTouch{
         m.End();
         ProjBulletTouch::DefaultPostTouch(@pThis, @pOther);
     }
+    void BonusTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
+        //飞到地图外面直接消失
+        if( g_EngineFuncs.PointContents( pThis.self.pev.origin ) == CONTENTS_SKY )
+		{
+			g_EntityFuncs.Remove( pThis.self );
+			return;
+		}
+        ProjBulletTouch::DefaultDirectTouch(@pThis, @pOther);
+        ProjBulletTouch::BonusPostTouch(@pThis, @pOther);
+    }
+    void BonusPostTouch(CProjBullet@ pThis, CBaseEntity@ pOther){
+        g_SoundSystem.EmitSound( pThis.self.edict(), CHAN_AUTO, pThis.szHitSound, 1.0f, ATTN_NONE );
+        if (pThis.iMaxBonus <= 0)
+            g_EntityFuncs.Remove(pThis.self);
+        else
+            pThis.iMaxBonus--;
+    }
 }
 class CProjBullet : ScriptBaseAnimating{
     string szSprPath = "sprites/svencontra2/bullet_mg.spr";
@@ -48,6 +65,8 @@ class CProjBullet : ScriptBaseAnimating{
     int iExpSclae;
     int iExpRadius;
     float flExpDmg;
+    //Bonus vars
+    int iMaxBonus = 5;
 
     BulletTouchCallback@ pTouchFunc = null;
 
@@ -155,5 +174,51 @@ CProjBullet@ ShootABullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVeloc
 
     g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
 
+    return pBullet;
+}
+
+CProjBullet@ ShootAExpBullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVelocity, int iDamage = 0, float flExpDmg = 0, int iExpRadius = 0, string szHitSnd = ""){
+    CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
+
+    g_EntityFuncs.SetOrigin( pBullet.self, vecOrigin );
+    @pBullet.pev.owner = @pOwner.edict();
+
+    pBullet.pev.velocity = vecVelocity;
+    pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
+    @pBullet.pTouchFunc = @ProjBulletTouch::ExplodeTouch;
+    pBullet.SetTouch( TouchFunction( pBullet.Touch ) );
+
+    pBullet.pev.dmg = iDamage;
+    pBullet.iDamageType = DMG_BLAST;
+    if (!szHitSnd.IsEmpty())
+        pBullet.szHitSound = szHitSnd;
+    //设置爆炸相关
+    pBullet.flExpDmg = flExpDmg;
+    pBullet.iExpRadius = iExpRadius;
+    pBullet.iExpSclae = Math.min(int(iRadius * 0.15), 255);
+
+    g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
+
+    return pBullet;
+}
+
+CProjBullet@ ShootABonusLaser(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVelocity, int iDamage = 0, int iMaxBonus, string szHitSnd = ""){
+    CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
+
+    g_EntityFuncs.SetOrigin( pBullet.self, vecOrigin );
+    @pBullet.pev.owner = @pOwner.edict();
+
+    pBullet.pev.velocity = vecVelocity;
+    pBullet.pev.angles = Math.VecToAngles( pBullet.pev.velocity );
+    @pBullet.pTouchFunc = @ProjBulletTouch::BonusTouch;
+    pBullet.SetTouch( TouchFunction( pBullet.Touch ) );
+    pBullet.iMaxBonus = iMaxBonus;
+    pBullet.pev.dmg = iDamage;
+    pBullet.iDamageType = DMG_ENERGYBEAM;
+    if (!szHitSnd.IsEmpty())
+        pBullet.szHitSound = szHitSnd;
+
+    g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
+    pBullet.pev.movetype = MOVETYPE_BOUNCEMISSILE;
     return pBullet;
 }

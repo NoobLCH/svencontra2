@@ -28,7 +28,7 @@ class  weapon_556ar : CBaseContraWeapon{
 
         szFireSound = "weapons/solidgear/556ar_shot.wav";
 
-        flBulletSpeed = 4500;
+        flBulletSpeed = 4000;
         flDamage = g_WeaponDMG.MG;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);

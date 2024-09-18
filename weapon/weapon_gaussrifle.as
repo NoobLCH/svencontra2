@@ -56,7 +56,7 @@ class  weapon_gaussrifle : CBaseContraWeapon{
         flDeployTime = 0.8f;
         flPrimeFireTime = 1.0f;
 
-        szWeaponAnimeExt = "m16";
+        szWeaponAnimeExt = "sniper";
 
         iDeployAnime = 8;
         iReloadAnime = 0;
@@ -65,7 +65,7 @@ class  weapon_gaussrifle : CBaseContraWeapon{
 
         szFireSound = "weapons/solidgear/gaussrifle_shot.wav";
 
-        flBulletSpeed = 5000;
+        flBulletSpeed = 4000;
         flDamage = g_WeaponDMG.LG;
         vecPunchX = Vector2D(-1,1);
         vecPunchY = Vector2D(-1,1);
@@ -122,9 +122,6 @@ class  weapon_gaussrifle : CBaseContraWeapon{
         KillBeam(m_pPlayer.entindex() + 4096);
         CBaseContraWeapon::PrimaryAttack();
         self.m_flNextSecondaryAttack = WeaponTimeBase() + flPrimeFireTime;
-    }
-    void SecondaryAttack() override{
-        PrimaryAttack();
     }
     CProjBullet@ CreateIvisibleProj(){
         CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));

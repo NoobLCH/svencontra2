@@ -15,9 +15,9 @@
 
         flDeployTime = 0.8f;
         flPrimeFireTime = 0.11f;
-        flSecconaryFireTime = 1.5f;
+        flSecconaryFireTime = 0.5f;
 
-        szWeaponAnimeExt = "m16";
+        szWeaponAnimeExt = "mp5";
 
         iDeployAnime = 4;
         iReloadAnime = 3;
@@ -91,8 +91,8 @@
             m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
         self.m_flNextPrimaryAttack = WeaponTimeBase() + flPrimeFireTime;
     }
-    void SecondaryAttack() override{    
-        /* if(bInRecharg)
+    /* void SecondaryAttack() override{
+        if(bInRecharg)
             return;
         if( m_pPlayer.m_rgAmmo( self.m_iSecondaryAmmoType ) <= 0){
             self.PlayEmptySound();
@@ -117,6 +117,6 @@
         pGrenade.pev.avelocity = g_vecZero;
 
         self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = WeaponTimeBase() + flSecconaryFireTime;
-        self.m_flTimeWeaponIdle = WeaponTimeBase() + 5; */
-    }
+        self.m_flTimeWeaponIdle = WeaponTimeBase() + 5;
+    } */
 }
