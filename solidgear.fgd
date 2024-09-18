@@ -327,8 +327,12 @@
     [
         0: "Proj Bullet"
         1: "Proj Laser"
+        2: "Proj Explosion"
+        3: "Bonus Laser"
     ]
     pellet(integer) : "Bullets per shot" : 1
+    burstcount(integer) : "Burst count per round" : 1
+    burstdelay(string) : "Burst delay" : "0.01"
     laserpath(string) : "Laser spr path"
     lasercolor(color255) : "Laser Color (R G B)" : "255 0 0"
     laserwidth(integer) : "Laser Width" : 2

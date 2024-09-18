@@ -827,12 +827,18 @@ class CFuncTankProj : CFuncTank
     string szLaserPath = "sprites/smoke.spr";
     float flSprSpeed = 400;
     float flSprScale;
-    //GunType: 0:ProjBullet|1:ProjLaser
+    //GunType: 0:ProjBullet|1:ProjLaser|2:ProjExp|3:BonusLaser
     int iGunType = 0;
     int iPellet = 1;
+    int iBurst = 1;
+    float flBurstDelay = 0.01f;
     Vector vecLaserColor = Vector(255, 0, 0);
     int iLaserWidth = 2;
     int iLaserLife = 1;
+
+    int m_iBurstLoaded = 0; //记录Burst还剩几发没打
+    float m_flBurstDelay = 0; //记录下一次Burst的时间
+
     bool KeyValue( const string& in szKey, const string& in szValue )
     {
         if ( szKey == "sprpath")
@@ -845,6 +851,10 @@ class CFuncTankProj : CFuncTank
             iGunType = atoi(szValue);
         else if (szKey == "pellet")
             iPellet = atoi(szValue);
+        else if (szKey == "burstcount")
+            iBurst = atoi(szValue);
+        else if ( szKey == "burstdelay")
+            flBurstDelay = atof(szValue);
         else if (szKey == "laserpath" && !szValue.IsEmpty())
             szLaserPath = szValue;
         else if (szKey == "laserwidth")
@@ -870,8 +880,24 @@ class CFuncTankProj : CFuncTank
         if ( m_fireLast != 0 )
         {
             int bulletCount = int((g_Engine.time - m_fireLast) * m_fireRate);
-            if ( bulletCount > 0 )
+            //发射条件(任一满足)：1:射击间隔满足；2:burst间隔满足,且有待发射的burst
+            bool canBurst = iBurst > 1 && m_iBurstLoaded > 0 && g_Engine.time <= m_flBurstDelay;
+            if ( bulletCount > 0 || canBurst )
             {
+                //burst处理
+                if (iBurst > 1) {
+                    if (m_iBurstLoaded <= 0) {
+                        if (bulletCount > 0) { //到下一轮射击的时间了，重新装填Burst
+                            m_iBurstLoaded = iBurst;
+                            m_flBurstDelay = g_Engine.time + flBurstDelay;
+                        }
+                    }
+                    else {
+                        m_iBurstLoaded--;
+                        m_flBurstDelay = g_Engine.time + flBurstDelay;
+                    }
+                }
+
                 for (int i = 0; i < iPellet; i++ )
                 {
                     Vector vecVelocity = TankProjTrace(forward, gTankSpread[m_spread], flSprSpeed);
