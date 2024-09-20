@@ -195,14 +195,14 @@ CProjBullet@ ShootAExpBullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVe
     //设置爆炸相关
     pBullet.flExpDmg = float(iExpDmg);
     pBullet.iExpRadius = iExpRadius;
-    pBullet.iExpSclae = Math.min(int(iRadius * 0.15), 255);
+    pBullet.iExpSclae = Math.min(int(iExpRadius * 0.15), 255);
 
     g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
 
     return pBullet;
 }
 
-CProjBullet@ ShootABonusLaser(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVelocity, int iDamage = 0, int iMaxBonus, string szHitSnd = ""){
+CProjBullet@ ShootABonusLaser(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVelocity, int iDamage = 0, int iMaxBonus = 5, string szHitSnd = ""){
     CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
 
     g_EntityFuncs.SetOrigin( pBullet.self, vecOrigin );

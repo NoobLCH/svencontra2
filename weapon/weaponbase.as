@@ -163,15 +163,15 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
 		{
 			self.m_fInZoom = false;
 			m_pPlayer.pev.fov = m_pPlayer.m_iFOV = 0; // 0 means reset to default fov
-            pPlayer.m_szAnimExtension = szWeaponAnimeExt;
+            m_pPlayer.m_szAnimExtension = szWeaponAnimeExt;
 		}
 		else if( m_pPlayer.pev.fov != 40 )
 		{
 			self.m_fInZoom = true;
 			m_pPlayer.pev.fov = m_pPlayer.m_iFOV = 40;
-            pPlayer.m_szAnimExtension = "sniperscope";
+            m_pPlayer.m_szAnimExtension = "sniperscope";
 		}
-        g_SoundSystem.EmitSoundDyn(pPlayer.edict(), CHAN_WEAPON, "weapons/357_cock1.wav", 0.8, ATTN_NORM, 0, PITCH_NORM);
+        g_SoundSystem.EmitSoundDyn(m_pPlayer.edict(), CHAN_WEAPON, "weapons/357_cock1.wav", 0.8, ATTN_NORM, 0, PITCH_NORM);
         self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = WeaponTimeBase() + flSecconaryFireTime;
     }
     void WeaponIdle(){
