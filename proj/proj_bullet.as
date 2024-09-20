@@ -177,7 +177,7 @@ CProjBullet@ ShootABullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVeloc
     return pBullet;
 }
 
-CProjBullet@ ShootAExpBullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVelocity, int iDamage = 0, float flExpDmg = 0, int iExpRadius = 0, string szHitSnd = ""){
+CProjBullet@ ShootAExpBullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVelocity, int iDamage = 0, int iExpDmg = 0, int iExpRadius = 0, string szHitSnd = ""){
     CProjBullet@ pBullet = cast<CProjBullet@>(CastToScriptClass(g_EntityFuncs.CreateEntity( BULLET_REGISTERNAME, null,  false)));
 
     g_EntityFuncs.SetOrigin( pBullet.self, vecOrigin );
@@ -193,7 +193,7 @@ CProjBullet@ ShootAExpBullet(CBaseEntity@ pOwner, Vector vecOrigin, Vector vecVe
     if (!szHitSnd.IsEmpty())
         pBullet.szHitSound = szHitSnd;
     //设置爆炸相关
-    pBullet.flExpDmg = flExpDmg;
+    pBullet.flExpDmg = float(iExpDmg);
     pBullet.iExpRadius = iExpRadius;
     pBullet.iExpSclae = Math.min(int(iRadius * 0.15), 255);
 

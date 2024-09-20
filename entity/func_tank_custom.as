@@ -832,9 +832,15 @@ class CFuncTankProj : CFuncTank
     int iPellet = 1;
     int iBurst = 1;
     float flBurstDelay = 0.01f;
+    //Laser Only
     Vector vecLaserColor = Vector(255, 0, 0);
     int iLaserWidth = 2;
     int iLaserLife = 1;
+    //Exp Only
+    int iExpDmg = 0;
+    int iExpRadius = 32;
+    //Bonus Only
+    int iMaxBonus = 5;
 
     int m_iBurstLoaded = 0; //记录Burst还剩几发没打
     float m_flBurstDelay = 0; //记录下一次Burst的时间
@@ -863,6 +869,12 @@ class CFuncTankProj : CFuncTank
             iLaserLife = atoi(szValue);
         else if(szKey == "lasercolor")
             g_Utility.StringToVector(vecLaserColor, szValue);
+        else if (szKey == "expdmg")
+            iExpDmg = atoi(szValue);
+        else if (szKey == "expradius")
+            iExpRadius = atoi(szValue);
+        else if (szKey == "maxbonus")
+            iMaxBonus = atoi(szValue);
         else
             return CFuncTank::KeyValue( szKey, szValue );
         return true;
@@ -901,10 +913,10 @@ class CFuncTankProj : CFuncTank
                 for (int i = 0; i < iPellet; i++ )
                 {
                     Vector vecVelocity = TankProjTrace(forward, gTankSpread[m_spread], flSprSpeed);
-                    CProjBullet@ pProj = ShootABullet(self, barrelEnd, vecVelocity, m_iBulletDamage, (iGunType == 1 ? DMG_ENERGYBEAM : DMG_BULLET));
-                    pProj.pev.scale = flSprScale;
-                    g_EntityFuncs.SetModel(pProj.self, szSprPath);
-                    if (iGunType == 1) {
+                    CProjBullet@ pProj = null;
+                    switch (iGunType) {
+                    case 1: //激光
+                        @pProj = ShootABullet(self, barrelEnd, vecVelocity, m_iBulletDamage, DMG_ENERGYBEAM);
                         if (!szLaserPath.IsEmpty()) {
                             NetworkMessage msg( MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY );
                                 msg.WriteByte( TE_BEAMFOLLOW );
@@ -918,7 +930,33 @@ class CFuncTankProj : CFuncTank
                                 msg.WriteByte( 255 ); // brightness
                             msg.End(); // move PHS/PVS data sending into here (SEND_ALL, SEND_PVS, SEND_PHS)
                         }
+                        break;
+                    case 2: //爆炸
+                        @pProj = ShootAExpBullet(self, barrelEnd, vecVelocity, m_iBulletDamage, iExpDmg, iExpRadius);
+                        break;
+                    case 3: //弹射激光
+                        @pProj = ShootABonusLaser(self, barrelEnd, vecVelocity, m_iBulletDamage, iMaxBonus);
+                        if (!szLaserPath.IsEmpty()) {
+                            NetworkMessage msg( MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY );
+                                msg.WriteByte( TE_BEAMFOLLOW );
+                                msg.WriteShort( pProj.self.entindex() ); // entity
+                                msg.WriteShort( g_EngineFuncs.ModelIndex(szLaserPath) ); // model
+                                msg.WriteByte( iLaserLife ); // life
+                                msg.WriteByte( iLaserWidth ); // width
+                                msg.WriteByte( int(vecLaserColor.x) ); // r, g, b
+                                msg.WriteByte( int(vecLaserColor.y) ); // r, g, b
+                                msg.WriteByte( int(vecLaserColor.z) ); // r, g, b
+                                msg.WriteByte( 255 ); // brightness
+                            msg.End(); // move PHS/PVS data sending into here (SEND_ALL, SEND_PVS, SEND_PHS)
+                        }
+                        break;
+                    case 0: //普通弹
+                    default:
+                        @pProj = ShootABullet(self, barrelEnd, vecVelocity, m_iBulletDamage, DMG_BULLET);
+                        break;
                     }
+                    pProj.pev.scale = flSprScale;
+                    g_EntityFuncs.SetModel(pProj.self, szSprPath);
                 }
                 CFuncTank::Fire( barrelEnd, forward, pev );
             }

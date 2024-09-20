@@ -337,6 +337,9 @@
     lasercolor(color255) : "Laser Color (R G B)" : "255 0 0"
     laserwidth(integer) : "Laser Width" : 2
     laserlife(integer) : "Laser Life" : 1
+    expdmg(integer) : "Explosion Damage" : 0
+    expradius(integer) : "Explosion Radius" : 32
+    maxbonus(integer) : "Max Bonus count" : 5
 ]
 @PointClass base(Targetname, Target) size(-16 -16 -16, 16 16 16) color(255 50 50) = weaponballoon : "Weapon Balloon"
 [
