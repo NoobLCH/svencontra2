@@ -861,7 +861,7 @@ class CFuncTankProj : CFuncTank
             iBurst = atoi(szValue);
         else if ( szKey == "burstdelay")
             flBurstDelay = atof(szValue);
-        else if (szKey == "laserpath" && !szValue.IsEmpty())
+        else if (szKey == "laserpath" && szValue != "")
             szLaserPath = szValue;
         else if (szKey == "laserwidth")
             iLaserWidth = atoi(szValue);
@@ -881,11 +881,15 @@ class CFuncTankProj : CFuncTank
     }
     void Precache()
     {
-        g_Game.PrecacheModel( szSprPath );
-        g_Game.PrecacheGeneric( szSprPath );
-        g_Game.PrecacheModel( szLaserPath );
-        g_Game.PrecacheGeneric( szLaserPath );
         CFuncTank::Precache();
+        if (szSprPath != ""){
+            g_Game.PrecacheModel( szSprPath );
+            g_Game.PrecacheGeneric( szSprPath );
+        }
+        if (szLaserPath != ""){
+            g_Game.PrecacheModel( szLaserPath );
+            g_Game.PrecacheGeneric( szLaserPath );
+        }
     }
     void Fire( const Vector barrelEnd, const Vector forward, entvars_t@ pevAttacker )
     {
@@ -917,7 +921,7 @@ class CFuncTankProj : CFuncTank
                     switch (iGunType) {
                     case 1: //激光
                         @pProj = ShootABullet(self, barrelEnd, vecVelocity, m_iBulletDamage, DMG_ENERGYBEAM);
-                        if (!szLaserPath.IsEmpty()) {
+                        if (szLaserPath != "") {
                             NetworkMessage msg( MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY );
                                 msg.WriteByte( TE_BEAMFOLLOW );
                                 msg.WriteShort( pProj.self.entindex() ); // entity
@@ -936,7 +940,7 @@ class CFuncTankProj : CFuncTank
                         break;
                     case 3: //弹射激光
                         @pProj = ShootABonusLaser(self, barrelEnd, vecVelocity, m_iBulletDamage, iMaxBonus);
-                        if (!szLaserPath.IsEmpty()) {
+                        if (szLaserPath != "") {
                             NetworkMessage msg( MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY );
                                 msg.WriteByte( TE_BEAMFOLLOW );
                                 msg.WriteShort( pProj.self.entindex() ); // entity
@@ -956,7 +960,8 @@ class CFuncTankProj : CFuncTank
                         break;
                     }
                     pProj.pev.scale = flSprScale;
-                    g_EntityFuncs.SetModel(pProj.self, szSprPath);
+                    if (szSprPath != "")
+                        g_EntityFuncs.SetModel(pProj.self, szSprPath);
                 }
                 CFuncTank::Fire( barrelEnd, forward, pev );
             }
