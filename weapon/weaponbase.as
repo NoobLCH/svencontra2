@@ -109,6 +109,11 @@ abstract class CBaseContraWeapon : ScriptBasePlayerWeaponEntity{
     }
     void Holster( int skiplocal /* = 0 */ ){    
         SetThink( null );
+        if (self.m_fInZoom){
+            self.m_fInZoom = false;
+            m_pPlayer.pev.fov = m_pPlayer.m_iFOV = 0; // 0 means reset to default fov
+            m_pPlayer.m_szAnimExtension = szWeaponAnimeExt;
+        }
         BaseClass.Holster();
     }
     bool PlayEmptySound(){

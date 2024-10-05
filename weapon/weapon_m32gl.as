@@ -17,15 +17,15 @@ class  weapon_m32gl : CBaseContraWeapon{
 
         szWeaponAnimeExt = "gauss";
 
-        iDeployAnime = 5;
+        iDeployAnime = 1;
         iReloadAnime = 3;
-        aryFireAnime = {1, 2};
+        aryFireAnime = {2};
         aryIdleAnime = {0};
 
         szFireSound = "weapons/solidgear/m32gl_shot.wav";
 
         flBulletSpeed = 1200;
-        flDamage = g_WeaponDMG.FG;
+        flDamage = g_WeaponDMG.FGE;
         vecPunchX = Vector2D(-4,5);
         vecPunchY = Vector2D(-1,1);
         vecEjectOffset = Vector(0,2,0);

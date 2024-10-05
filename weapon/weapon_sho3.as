@@ -21,8 +21,8 @@ class  weapon_sho3 : CBaseContraWeapon{
 
         iDeployAnime = 6;
         iReloadAnime = 3;
-        aryFireAnime = {1, 2};
-        aryIdleAnime = {0, 8};
+        aryFireAnime = {1};
+        aryIdleAnime = {0, 8, 9};
 
         szFireSound = "weapons/solidgear/sho3_shot.wav";
 
@@ -82,6 +82,7 @@ class  weapon_sho3 : CBaseContraWeapon{
             return;
         }
         Fire(8);
+        self.SendWeaponAnim(2, 0, 0);
         if( m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
             m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
         self.m_flNextSecondaryAttack = WeaponTimeBase() + flSecconaryFireTime;

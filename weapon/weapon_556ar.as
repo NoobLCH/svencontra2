@@ -22,9 +22,9 @@ class  weapon_556ar : CBaseContraWeapon{
         szWeaponAnimeExt = "m16";
 
         iDeployAnime = 5;
-        iReloadAnime = 3;
-        aryFireAnime = {6, 7, 8};
-        aryIdleAnime = {0, 1};
+        iReloadAnime = 4;
+        aryFireAnime = {1, 2, 3};
+        aryIdleAnime = {0};
 
         szFireSound = "weapons/solidgear/556ar_shot.wav";
 
@@ -63,12 +63,12 @@ class  weapon_556ar : CBaseContraWeapon{
         pBullet.pev.dmg = flDamage;
         g_EntityFuncs.DispatchSpawn( pBullet.self.edict() );
     }
-    void SecondaryAttack() override{
+    /* void SecondaryAttack() override{
         CBaseContraWeapon::SecondaryAttack();
         iBurstLeft = iMaxBurstFire - 1;
         flNextBurstTime = WeaponTimeBase() + flBurstTime;
         self.m_flNextSecondaryAttack = self.m_flNextPrimaryAttack = WeaponTimeBase() + flSecconaryFireTime;
-    }
+    } */
     void ItemPostFrame(){
         if( iBurstLeft > 0 ){
             if( flNextBurstTime < WeaponTimeBase() ){

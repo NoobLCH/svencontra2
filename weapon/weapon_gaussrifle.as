@@ -55,13 +55,14 @@ class  weapon_gaussrifle : CBaseContraWeapon{
 
         flDeployTime = 0.8f;
         flPrimeFireTime = 1.0f;
+        flSecconaryFireTime = 0.5f;
 
         szWeaponAnimeExt = "sniper";
 
-        iDeployAnime = 8;
-        iReloadAnime = 0;
-        aryFireAnime = {5, 6};
-        aryIdleAnime = {0, 1};
+        iDeployAnime = 6;
+        iReloadAnime = 5;
+        aryFireAnime = {1, 2, 3};
+        aryIdleAnime = {0};
 
         szFireSound = "weapons/solidgear/gaussrifle_shot.wav";
 

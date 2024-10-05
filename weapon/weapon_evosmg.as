@@ -19,10 +19,10 @@
 
         szWeaponAnimeExt = "mp5";
 
-        iDeployAnime = 4;
-        iReloadAnime = 3;
-        aryFireAnime = {5, 6, 7};
-        aryIdleAnime = {0, 1};
+        iDeployAnime = 2;
+        iReloadAnime = 1;
+        aryFireAnime = {3, 4, 5};
+        aryIdleAnime = {0};
 
         szFireSound = "weapons/solidgear/evosmg_shot.wav";
 
