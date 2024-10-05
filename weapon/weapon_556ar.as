@@ -15,8 +15,8 @@ class  weapon_556ar : CBaseContraWeapon{
         iSlot = 2;
         iPosition = 20;
 
-        flDeployTime = 0.8f;
-        flPrimeFireTime = 0.09f;
+        flDeployTime = 0.86f;
+        flPrimeFireTime = 0.1f;
         flSecconaryFireTime = 0.5f;
 
         szWeaponAnimeExt = "m16";

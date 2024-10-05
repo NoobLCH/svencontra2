@@ -13,7 +13,7 @@ class  weapon_sho3 : CBaseContraWeapon{
         iSlot = 2;
         iPosition = 21;
 
-        flDeployTime = 0.8f;
+        flDeployTime = 0.53f;
         flPrimeFireTime = 0.8f;
         flSecconaryFireTime = 0.25f;
 

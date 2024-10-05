@@ -53,7 +53,7 @@ class  weapon_gaussrifle : CBaseContraWeapon{
         iSlot = 3;
         iPosition = 21;
 
-        flDeployTime = 0.8f;
+        flDeployTime = 1.22f;
         flPrimeFireTime = 1.0f;
         flSecconaryFireTime = 0.5f;
 

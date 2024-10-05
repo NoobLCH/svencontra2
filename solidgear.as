@@ -33,7 +33,7 @@ void MapInit(){
     g_CustomEntityFuncs.RegisterCustomEntity( "CWeaponBalloon", "weaponballoon" );
     g_Game.PrecacheOther(BULLET_REGISTERNAME);
     g_CustomEntityFuncs.RegisterCustomEntity( "CustomTank::CFuncTankProj", "func_tanksg" );
-    RegisterPointCheckPointEntity();
+    // RegisterPointCheckPointEntity();
 
     PrecacheAllMonsterDeath();
 
@@ -52,7 +52,7 @@ void MapInit(){
     g_CustomEntityFuncs.RegisterCustomEntity( "weapon_gaussrifle", "weapon_gaussrifle" );
     g_ItemRegistry.RegisterWeapon( "weapon_gaussrifle", "solidgear", "uranium");
 
-    g_SurvivalMode.EnableMapSupport();
+    // g_SurvivalMode.EnableMapSupport();
 }
 
 void MapStart(){

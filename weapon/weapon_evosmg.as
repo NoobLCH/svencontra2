@@ -13,8 +13,8 @@
         iSlot = 1;
         iPosition = 21;
 
-        flDeployTime = 0.8f;
-        flPrimeFireTime = 0.11f;
+        flDeployTime = 1.63f;
+        flPrimeFireTime = 0.09f;
         flSecconaryFireTime = 0.5f;
 
         szWeaponAnimeExt = "mp5";

@@ -11,7 +11,7 @@ class  weapon_m32gl : CBaseContraWeapon{
         iSlot = 3;
         iPosition = 20;
 
-        flDeployTime = 0.8f;
+        flDeployTime = 1.22f;
         flPrimeFireTime = 0.7f;
         flSecconaryFireTime = 0.5f;
 
@@ -59,5 +59,6 @@ class  weapon_m32gl : CBaseContraWeapon{
       //直接使用原版榴弹
       CGrenade@ pGrenade = g_EntityFuncs.ShootContact( m_pPlayer.pev, m_pPlayer.GetGunPosition(), m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES ) * flBulletSpeed );
       pGrenade.pev.dmg = flDamage;
+      pGrenade.pev.gravity = 0.5f;
    }
  }
