@@ -15761,7 +15761,7 @@ namespace String {
 //Distance from the world origin to the world boundary in a single axis;
 const float WORLD_BOUNDARY;
 //Called when the map changes. This happens when the world is destroyed. There may still be entities that exist at this point.;
-funcdef HookReturnCode MapChangeHook();
+funcdef HookReturnCode MapChangeHook(const string& in);
 //Called when a new entity is created. At this point the entity is not spawned yet and may not be fully initialized.;
 funcdef HookReturnCode EntityCreatedHook(CBaseEntity@);
 //Called when a player disconnects. Note that this is only called if the player was fully connected, meaning the player went through ClientPutInServer. This is never called for the local host.;
